@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+import django
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -30,9 +31,11 @@ INSTALLED_APPS = [
 
     # apps
     'api',
-    'users',
+    'users.apps.UsersConfig',
     'recipes',
 ]
+
+django.setup()
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
