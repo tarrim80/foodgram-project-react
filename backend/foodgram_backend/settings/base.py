@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     # apps
     'users',
     'recipes',
-    'api',
 ]
 
 MIDDLEWARE = [
@@ -46,10 +45,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'foodgram_backend.urls'
 
+TEMPLATES_DIR = BASE_DIR / 'templates'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,7 +64,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'foodgram_backend.wsgi.application'
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
