@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-import django
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,7 +34,6 @@ INSTALLED_APPS = [
     'recipes',
 ]
 
-django.setup()
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -67,6 +65,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'foodgram_backend.wsgi.application'
+
 
 LANGUAGE_CODE = 'ru-RU'
 

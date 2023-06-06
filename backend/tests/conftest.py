@@ -1,8 +1,11 @@
 import os
 import sys
 
+import django
 from django.utils.version import get_version
 from foodgram_backend.settings.base import INSTALLED_APPS
+
+django.setup()
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
