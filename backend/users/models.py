@@ -4,9 +4,23 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class User(AbstractUser):
-    first_name = models.CharField(_('first name'), max_length=150)
-    last_name = models.CharField(_('last name'), max_length=150)
-    email = models.EmailField(_('email address'), unique=True, db_index=True)
+    first_name = models.CharField(
+        _('first name'),
+        max_length=150,
+        help_text='Обязательное поле. Имя пользователя.'
+    )
+    last_name = models.CharField(
+        _('last name'),
+        max_length=150,
+        help_text='Обязательное поле. Фамилия пользователя.'
+    )
+    email = models.EmailField(
+        _('email address'),
+        unique=True,
+        db_index=True,
+        help_text='Обязательное поле. Введите существующий '
+        'адрес электронной почты.'
+    )
     is_staff = models.BooleanField(
         'администратор',
         default=False,
