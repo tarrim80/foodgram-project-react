@@ -30,9 +30,10 @@ INSTALLED_APPS = [
 
     # apps
     'api',
-    'users',
+    'users.apps.UsersConfig',
     'recipes',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,6 +65,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'foodgram_backend.wsgi.application'
+
 
 LANGUAGE_CODE = 'ru-RU'
 
