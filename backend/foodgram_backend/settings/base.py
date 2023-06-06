@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
     # libraries
     'drf_yasg',
+    'colorfield',
     'django_filters',
     'rest_framework',
     'rest_framework_simplejwt',
