@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # libraries
-    'drf_yasg',
     'colorfield',
     'django_filters',
     'rest_framework',
