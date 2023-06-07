@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import User
+from users.models import User
 
 
 class UserCreateForm(UserCreationForm):
@@ -16,7 +16,7 @@ class UserCreateForm(UserCreationForm):
 
 
 class UserAdmin(UserAdmin):
-    """ Админ-панель пользователей """
+    """Админ-панель пользователей."""
     add_form = UserCreateForm
     add_fieldsets = (
         (None, {
