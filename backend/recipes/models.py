@@ -150,7 +150,7 @@ class RecipeIngredient(models.Model):
                                    verbose_name='Ингредиент',
                                    help_text='Выберите ингредиенты.')
 
-    amount = models.IntegerField(
+    amount = models.FloatField(
         verbose_name='Количество',
         help_text='Укажите необходимое количество продукта.',
         validators=(MinValueValidator(1),)
@@ -168,3 +168,43 @@ class RecipeIngredient(models.Model):
 
     def __str__(self) -> str:
         return f'{self.resipe}_{ self.ingredient}'
+
+
+class RecipeRelation(models.Model):
+    """
+    Модель связующая пользователя с рецептами посредством булевых полей
+    `on_favorites_list` `on_shopping_list`.
+    """
+    user = models.ForeignKey(User,
+                             verbose_name='пользователь',
+                             help_text='Укажите пользователя',
+                             on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe,
+                               verbose_name='Рецепт',
+                               help_text='Выберите рецепт',
+                               on_delete=models.CASCADE)
+    on_favorite_list = models.BooleanField(
+        verbose_name='В избранном',
+        help_text='Отметьте, чтобы добавить в избранное',
+        default=False
+    )
+    on_shopping_list = models.BooleanField(
+        verbose_name='В списке покупок',
+        help_text='Отметьте, чтобы добавить в список покупок',
+        default=False
+    )
+
+    class Meta:
+        verbose_name = 'Связи рецепта'
+        verbose_name_plural = 'Связи рецептов'
+        ordering = ('user', '-recipe')
+        default_related_name = 'relations'
+        constraints = (
+            models.UniqueConstraint(
+                fields=('user', 'recipe'),
+                name='unique_recipe_relations'
+            ),
+        )
+
+    def __str__(self) -> str:
+        return f'{self.user} - {self.recipe}'
