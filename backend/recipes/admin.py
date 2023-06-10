@@ -63,8 +63,6 @@ class RecipeAdmin(admin.ModelAdmin):
         return obj.relations.filter(on_favorite_list=True).count()
 
     favorite_count.short_description = 'В избранном'
-    favorite_count.description = 'Количество добавлений рецепта в избранное'
-    favorite_count.allow_tags = True
 
     image_tag.short_description = 'Миниатюра'
     image_tag.allow_tags = True
