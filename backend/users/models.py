@@ -31,3 +31,34 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.get_full_name()
+
+
+class Subscribe(models.Model):
+    user = models.ForeignKey(
+        User,
+        related_name='follower',
+        verbose_name='Подписчик',
+        help_text='Пользователь, который оформил подписку',
+        on_delete=models.CASCADE,
+    )
+    author = models.ForeignKey(
+        User,
+        related_name='following',
+        verbose_name='Автор контента',
+        help_text='Пользователь, на которого оформлена подписка',
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        verbose_name = 'Подписки'
+        verbose_name_plural = 'Подписки'
+        constraints = (
+            models.UniqueConstraint(
+                fields=('user', 'author'),
+                name='unique_follower'
+            ),
+        )
+
+    def __str__(self) -> str:
+        return (f'{self.user} подписан на рецепты, которые разместил(а)'
+                f' {self.author}')
