@@ -139,3 +139,6 @@ collected_static/
 
 #media
 media/
+
+# requests
+*.http

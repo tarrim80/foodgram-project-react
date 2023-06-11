@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'colorfield',
     'django_filters',
     'rest_framework',
-    'rest_framework_simplejwt',
+    'rest_framework.authtoken',
+    'djoser',
 
     # apps
     'api',
