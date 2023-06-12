@@ -4,12 +4,17 @@ from djoser.serializers import SetPasswordSerializer
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
-from api.serializers import FoodgramUserSerializer, SignUpSerializer  # noqa
+from api.pagination import LimitPageNumberPagination
+from api.permission import IsAdminOrReadOnly, IsAuthorOrReadOnly
+from api.serializers import (FoodgramUserSerializer, IngredientSerializer,
+                             SignUpSerializer, TagSerializer)
+from recipes.models import Ingredient, Recipe, Tag
 from users.models import User
 
 
@@ -33,19 +38,36 @@ class UserViewSet(ModelViewSet):
     serializer_class = FoodgramUserSerializer
     permission_classes = (AllowAny,)
     lookup_field = 'id'
+    pagination_class = LimitPageNumberPagination
 
-    @action(["post"], detail=False, permission_classes=[IsAuthenticated])
+    @action(('post',), detail=False, permission_classes=(IsAuthenticated,))
     def set_password(self, request, *args, **kwargs):
         serializer = SetPasswordSerializer(
             data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
-        self.request.user.set_password(serializer.data["new_password"])
+        self.request.user.set_password(serializer.data['new_password'])
         self.request.user.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    @action(methods=['get'], detail=False,
-            permission_classes=[IsAuthenticated])
+    @action(methods=('get',), detail=False,
+            permission_classes=(IsAuthenticated,))
     def me(self, request):
         obj = get_object_or_404(User, email=request.user.email)
         serializer = self.get_serializer(obj)
         return Response(serializer.data)
+
+
+class TagViewSet(ReadOnlyModelViewSet):
+    """Представление тегов."""
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = (IsAdminOrReadOnly,)
+
+
+class IngredientViewSet(ReadOnlyModelViewSet):
+    """Представление ингредиентов."""
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+    permission_classes = (IsAdminOrReadOnly,)
+    filter_backends = (SearchFilter,)
+    search_fields = ('name',)

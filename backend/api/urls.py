@@ -1,7 +1,7 @@
 from django.urls import include, path, re_path
 from rest_framework.routers import DefaultRouter
 
-from api.views import GetTokenUser, UserViewSet  # noqa
+from api.views import GetTokenUser, IngredientViewSet, TagViewSet, UserViewSet  # noqa
 
 router = DefaultRouter()
 
@@ -9,12 +9,12 @@ router.register(
     'users', UserViewSet, basename='users'
 )
 
-# router.register(
-#     'categories', CategoryViewSet, basename='categories'
-# )
-# router.register(
-#     'genres', GenreViewSet, basename='genre'
-# )
+router.register(
+    'tags', TagViewSet, basename='tags'
+)
+router.register(
+    'ingredients', IngredientViewSet, basename='ingredients'
+)
 # router.register(
 #     'titles', TitleViewSet, basename='title'
 # )

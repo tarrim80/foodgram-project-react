@@ -60,7 +60,7 @@ class RecipeAdmin(admin.ModelAdmin):
         )
 
     def favorite_count(self, obj) -> int:
-        return obj.relations.filter(on_favorite_list=True).count()
+        return obj.relations.filter(is_favorited=True).count()
 
     favorite_count.short_description = 'В избранном'
 
@@ -70,9 +70,9 @@ class RecipeAdmin(admin.ModelAdmin):
 
 class RecipeRelationAdmin(admin.ModelAdmin):
     """Админ-панель отношений пользователя и рецепта."""
-    list_display = ('user', 'recipe', 'on_favorite_list',
-                    'on_shopping_list')
-    list_filter = ('user', 'on_favorite_list', 'on_shopping_list')
+    list_display = ('user', 'recipe', 'is_favorited',
+                    'is_in_shopping_cart')
+    list_filter = ('user', 'is_favorited', 'is_in_shopping_cart')
     search_fields = ('user', 'recipe')
 
 

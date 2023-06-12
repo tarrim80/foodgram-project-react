@@ -13,7 +13,7 @@ class Ingredient(models.Model):
 
     name = models.CharField(max_length=200,
                             verbose_name='Название',
-                            help_text='Наименование ингредиента')
+                            help_text='Наименование ингредиента',)
     measurement_unit = models.CharField(max_length=200,
                                         verbose_name='Единицы измерения',
                                         help_text='Единицы измерения продукта')
@@ -35,10 +35,11 @@ class Tag(models.Model):
 
     name = models.CharField(max_length=200,
                             verbose_name='Название',
-                            help_text='Наименование тега')
+                            help_text='Наименование тега',
+                            unique=True)
 
     color = ColorField(default='#FF0000',
-                       null=True,
+                       unique=True,
                        verbose_name='Цветовой HEX-код',
                        help_text='Определите цвет тега')
 
@@ -183,12 +184,12 @@ class RecipeRelation(models.Model):
                                verbose_name='Рецепт',
                                help_text='Выберите рецепт',
                                on_delete=models.CASCADE)
-    on_favorite_list = models.BooleanField(
+    is_favorited = models.BooleanField(
         verbose_name='В избранном',
         help_text='Отметьте, чтобы добавить в избранное',
         default=False
     )
-    on_shopping_list = models.BooleanField(
+    is_in_shopping_cart = models.BooleanField(
         verbose_name='В списке покупок',
         help_text='Отметьте, чтобы добавить в список покупок',
         default=False

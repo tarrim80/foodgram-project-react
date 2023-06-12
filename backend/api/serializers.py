@@ -2,11 +2,14 @@ from djoser.serializers import UserSerializer
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from api.validators import validate_username  # noqa
+from api.validators import validate_username
+from recipes.models import Ingredient, Tag
 from users.models import User
 
 
 class UsernameMeMixin:
+    """Валидация имени пользователя на зарезервированное слово `me`."""
+
     def validate_username(self, username):
         if username == 'me':
             raise serializers.ValidationError(
@@ -15,6 +18,7 @@ class UsernameMeMixin:
 
 
 class FoodgramUserSerializer(UserSerializer):
+    """Сериализатор пользователей приложения."""
     last_name = serializers.CharField(max_length=150, required=True)
     first_name = serializers.CharField(max_length=150, required=True)
     email = serializers.CharField(max_length=254, required=True, validators=(
@@ -45,6 +49,7 @@ class FoodgramUserSerializer(UserSerializer):
 
 
 class SignUpSerializer(serializers.ModelSerializer, UsernameMeMixin):
+    """Сериализатор регистрации пользователей приложения."""
     email = serializers.EmailField(max_length=254)
     password = serializers.CharField(
         write_only=True, style={'input_type': 'password'})
@@ -77,3 +82,17 @@ class SignUpSerializer(serializers.ModelSerializer, UsernameMeMixin):
             'password': {'required': True},
             'email': {'required': True}
         }
+
+
+class TagSerializer(serializers.ModelSerializer):
+    """Сериализатор тегов."""
+    class Meta:
+        model = Tag
+        fields = ('id', 'name', 'color', 'slug')
+
+
+class IngredientSerializer(serializers.ModelSerializer):
+    """Сериализатор ингредиентов."""
+    class Meta:
+        model = Ingredient
+        fields = ('id', 'name', 'measurement_unit')
