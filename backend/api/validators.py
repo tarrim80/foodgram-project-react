@@ -3,7 +3,7 @@ import re
 from django.core.exceptions import ValidationError
 
 
-def validate_username(username):
+def username_validator(username):
     """
     Проверка uername пользователя.
     """

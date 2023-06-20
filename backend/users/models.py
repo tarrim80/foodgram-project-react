@@ -20,7 +20,9 @@ class User(AbstractUser):
         unique=True,
         db_index=True,
         help_text='Обязательное поле. Введите существующий '
-        'адрес электронной почты.'
+        'адрес электронной почты.',
+        error_messages={'unique': ('Пользователь с таким адресом электронной '
+                        'почты уже существует')}
     )
     is_staff = models.BooleanField(
         'администратор',

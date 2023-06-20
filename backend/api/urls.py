@@ -1,7 +1,7 @@
-from django.urls import include, path, re_path
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from api.views import GetTokenUser, IngredientViewSet, TagViewSet, UserViewSet  # noqa
+from api.views import IngredientViewSet, RecipeViewSet, TagViewSet, UserViewSet  # noqa
 
 router = DefaultRouter()
 
@@ -15,9 +15,9 @@ router.register(
 router.register(
     'ingredients', IngredientViewSet, basename='ingredients'
 )
-# router.register(
-#     'titles', TitleViewSet, basename='title'
-# )
+router.register(
+    'recipes', RecipeViewSet, basename='recipes'
+)
 # router.register(
 #     r'titles/(?P<title_id>\d+)/reviews',
 #     ReviewViewSet,
@@ -32,8 +32,5 @@ router.register(
 urlpatterns = [
     path('', include(router.urls)),
     path('auth/', include('djoser.urls')),
-    path('auth/token/login/', GetTokenUser.as_view()),
-    re_path(r'^auth/', include('djoser.urls.authtoken')),
-    # path('auth/token/', include('djoser.urls.jwt')),
-    # path('auth/signup/', signup_user),
+    path('auth/', include('djoser.urls.authtoken')),
 ]

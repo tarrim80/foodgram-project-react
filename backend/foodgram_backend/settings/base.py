@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 
     # apps
     'api',
-    'users.apps.UsersConfig',
+    'users',
     'recipes',
 ]
 

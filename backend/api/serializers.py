@@ -1,87 +1,27 @@
-from djoser.serializers import UserSerializer
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
+from rest_framework.validators import UniqueValidator, UniqueTogetherValidator
 
-from api.validators import validate_username
-from recipes.models import Ingredient, Tag
-from users.models import User
-
-
-class UsernameMeMixin:
-    """Валидация имени пользователя на зарезервированное слово `me`."""
-
-    def validate_username(self, username):
-        if username == 'me':
-            raise serializers.ValidationError(
-                'username не может быть "me"')
-        return username
+from api.validators import username_validator
+from recipes.models import Ingredient, Recipe, RecipeIngredient, Tag
+from users.models import User, Subscribe
+from djoser.serializers import UserSerializer as DjoserSerializer
 
 
-class FoodgramUserSerializer(UserSerializer):
+class UserSerializer(DjoserSerializer):
     """Сериализатор пользователей приложения."""
-    last_name = serializers.CharField(max_length=150, required=True)
-    first_name = serializers.CharField(max_length=150, required=True)
-    email = serializers.CharField(max_length=254, required=True, validators=(
-        UniqueValidator(
-            queryset=User.objects.all(),
-            message='email должен быть уникальным!'
-        ),
-    ))
-    username = serializers.CharField(
-        max_length=150,
-        required=True,
-        validators=(
-            validate_username,
-            UniqueValidator(
-                queryset=User.objects.all(),
-                message='username должен быть уникальным!'
-            )),
-    )
-    password = serializers.CharField(
-        write_only=True, required=True,
-        style={'input_type': 'password'})
+    is_subscribed = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = ('email', 'id', 'username', 'first_name',
-                  'last_name', 'password')
-        read_only_fields = ('id',)
+                  'last_name', 'password', 'is_subscribed')
+        read_only_fields = ('id', 'is_subscribed')
+        extra_kwargs = {'password': {'write_only': True}, }
 
-
-class SignUpSerializer(serializers.ModelSerializer, UsernameMeMixin):
-    """Сериализатор регистрации пользователей приложения."""
-    email = serializers.EmailField(max_length=254)
-    password = serializers.CharField(
-        write_only=True, style={'input_type': 'password'})
-
-    def validate(self, data):
-        password = data['password']
-        email = data['email']
-
-        if email and password:
-            try:
-                user = User.objects.get(email=email)
-                if not user.check_password(password):
-                    raise serializers.ValidationError(
-                        'Некорректный пароль.')
-                data['user'] = user
-            except User.DoesNotExist:
-                raise serializers.ValidationError(
-                    'Пользователь с таким `email` не зарегистрирован.'
-                )
-        else:
-            raise serializers.ValidationError(
-                'Учётные данные не предоставлены.'
-            )
-        return data
-
-    class Meta:
-        model = User
-        fields = ('password', 'email')
-        extra_kwargs = {
-            'password': {'required': True},
-            'email': {'required': True}
-        }
+    def get_is_subscribed(self, obj) -> bool:
+        user = self.context.get('request').user
+        return False if user.is_anonymous else Subscribe.objects.filter(
+            author=obj.id, user=user).exists()
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -96,3 +36,35 @@ class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
         fields = ('id', 'name', 'measurement_unit')
+
+
+class IngredientAmountSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField(source='ingredient.id')
+    name = serializers.ReadOnlyField(source='ingredient.name')
+    measurement_unit = serializers.ReadOnlyField(
+        source='ingredient.measurement_unit'
+    )
+
+    class Meta:
+        model = RecipeIngredient
+        fields = ('id', 'name', 'measurement_unit', 'amount')
+        validators = (
+            UniqueTogetherValidator(
+                queryset=RecipeIngredient.objects.all(),
+                fields=('ingredient', 'recipe'),
+                message='Этот ингредиент уже добавлен!'
+            ),
+        )
+
+
+class RecipeSerializer(serializers.ModelSerializer):
+    """Сериализатор рецептов."""
+    # author = UserSerializer()
+    tags = TagSerializer(many=True)
+    ingredients = IngredientAmountSerializer(
+        source='recipeingredient_set', many=True)
+
+    class Meta:
+        model = Recipe
+        fields = ('id', 'tags', 'author', 'ingredients', 'name', 'image',
+                  'text', 'cooking_time')
