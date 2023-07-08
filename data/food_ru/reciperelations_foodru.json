@@ -1,0 +1,1962 @@
+[
+    {
+        "model": "recipes.reciperelation",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "recipe": 33,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 2,
+        "fields": {
+            "user": 1,
+            "recipe": 35,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 3,
+        "fields": {
+            "user": 1,
+            "recipe": 38,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 4,
+        "fields": {
+            "user": 1,
+            "recipe": 39,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 5,
+        "fields": {
+            "user": 1,
+            "recipe": 10,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 6,
+        "fields": {
+            "user": 1,
+            "recipe": 11,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 7,
+        "fields": {
+            "user": 1,
+            "recipe": 15,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 8,
+        "fields": {
+            "user": 1,
+            "recipe": 24,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 9,
+        "fields": {
+            "user": 2,
+            "recipe": 1,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 10,
+        "fields": {
+            "user": 2,
+            "recipe": 5,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 11,
+        "fields": {
+            "user": 2,
+            "recipe": 8,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 12,
+        "fields": {
+            "user": 2,
+            "recipe": 10,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 13,
+        "fields": {
+            "user": 2,
+            "recipe": 11,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 14,
+        "fields": {
+            "user": 2,
+            "recipe": 12,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 15,
+        "fields": {
+            "user": 2,
+            "recipe": 13,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 16,
+        "fields": {
+            "user": 2,
+            "recipe": 14,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 17,
+        "fields": {
+            "user": 2,
+            "recipe": 15,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 18,
+        "fields": {
+            "user": 2,
+            "recipe": 17,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 19,
+        "fields": {
+            "user": 2,
+            "recipe": 19,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 20,
+        "fields": {
+            "user": 2,
+            "recipe": 21,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 21,
+        "fields": {
+            "user": 2,
+            "recipe": 24,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 22,
+        "fields": {
+            "user": 2,
+            "recipe": 25,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 23,
+        "fields": {
+            "user": 2,
+            "recipe": 27,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 24,
+        "fields": {
+            "user": 2,
+            "recipe": 29,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 25,
+        "fields": {
+            "user": 2,
+            "recipe": 31,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 26,
+        "fields": {
+            "user": 2,
+            "recipe": 32,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 27,
+        "fields": {
+            "user": 2,
+            "recipe": 34,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 28,
+        "fields": {
+            "user": 2,
+            "recipe": 35,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 29,
+        "fields": {
+            "user": 2,
+            "recipe": 36,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 30,
+        "fields": {
+            "user": 2,
+            "recipe": 39,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 31,
+        "fields": {
+            "user": 3,
+            "recipe": 1,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 32,
+        "fields": {
+            "user": 3,
+            "recipe": 36,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 33,
+        "fields": {
+            "user": 3,
+            "recipe": 7,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 34,
+        "fields": {
+            "user": 4,
+            "recipe": 32,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 35,
+        "fields": {
+            "user": 4,
+            "recipe": 2,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 36,
+        "fields": {
+            "user": 4,
+            "recipe": 35,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 37,
+        "fields": {
+            "user": 4,
+            "recipe": 34,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 38,
+        "fields": {
+            "user": 4,
+            "recipe": 5,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 39,
+        "fields": {
+            "user": 4,
+            "recipe": 29,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 40,
+        "fields": {
+            "user": 5,
+            "recipe": 1,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 41,
+        "fields": {
+            "user": 5,
+            "recipe": 2,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 42,
+        "fields": {
+            "user": 5,
+            "recipe": 4,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 43,
+        "fields": {
+            "user": 5,
+            "recipe": 5,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 44,
+        "fields": {
+            "user": 5,
+            "recipe": 9,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 45,
+        "fields": {
+            "user": 5,
+            "recipe": 11,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 46,
+        "fields": {
+            "user": 5,
+            "recipe": 13,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 47,
+        "fields": {
+            "user": 5,
+            "recipe": 14,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 48,
+        "fields": {
+            "user": 5,
+            "recipe": 16,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 49,
+        "fields": {
+            "user": 5,
+            "recipe": 17,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 50,
+        "fields": {
+            "user": 5,
+            "recipe": 21,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 51,
+        "fields": {
+            "user": 5,
+            "recipe": 22,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 52,
+        "fields": {
+            "user": 5,
+            "recipe": 25,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 53,
+        "fields": {
+            "user": 5,
+            "recipe": 30,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 54,
+        "fields": {
+            "user": 5,
+            "recipe": 32,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 55,
+        "fields": {
+            "user": 5,
+            "recipe": 33,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 56,
+        "fields": {
+            "user": 5,
+            "recipe": 34,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 57,
+        "fields": {
+            "user": 5,
+            "recipe": 37,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 58,
+        "fields": {
+            "user": 5,
+            "recipe": 39,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 59,
+        "fields": {
+            "user": 6,
+            "recipe": 32,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 60,
+        "fields": {
+            "user": 6,
+            "recipe": 33,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 61,
+        "fields": {
+            "user": 6,
+            "recipe": 3,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 62,
+        "fields": {
+            "user": 6,
+            "recipe": 35,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 63,
+        "fields": {
+            "user": 6,
+            "recipe": 5,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 64,
+        "fields": {
+            "user": 6,
+            "recipe": 38,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 65,
+        "fields": {
+            "user": 6,
+            "recipe": 37,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 66,
+        "fields": {
+            "user": 6,
+            "recipe": 40,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 67,
+        "fields": {
+            "user": 6,
+            "recipe": 8,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 68,
+        "fields": {
+            "user": 6,
+            "recipe": 15,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 69,
+        "fields": {
+            "user": 6,
+            "recipe": 16,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 70,
+        "fields": {
+            "user": 6,
+            "recipe": 17,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 71,
+        "fields": {
+            "user": 6,
+            "recipe": 18,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 72,
+        "fields": {
+            "user": 6,
+            "recipe": 22,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 73,
+        "fields": {
+            "user": 6,
+            "recipe": 27,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 74,
+        "fields": {
+            "user": 6,
+            "recipe": 30,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 75,
+        "fields": {
+            "user": 6,
+            "recipe": 31,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 76,
+        "fields": {
+            "user": 7,
+            "recipe": 1,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 77,
+        "fields": {
+            "user": 7,
+            "recipe": 4,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 78,
+        "fields": {
+            "user": 7,
+            "recipe": 5,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 79,
+        "fields": {
+            "user": 7,
+            "recipe": 6,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 80,
+        "fields": {
+            "user": 7,
+            "recipe": 8,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 81,
+        "fields": {
+            "user": 7,
+            "recipe": 10,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 82,
+        "fields": {
+            "user": 7,
+            "recipe": 13,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 83,
+        "fields": {
+            "user": 7,
+            "recipe": 15,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 84,
+        "fields": {
+            "user": 7,
+            "recipe": 16,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 85,
+        "fields": {
+            "user": 7,
+            "recipe": 18,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 86,
+        "fields": {
+            "user": 7,
+            "recipe": 21,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 87,
+        "fields": {
+            "user": 7,
+            "recipe": 23,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 88,
+        "fields": {
+            "user": 7,
+            "recipe": 25,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 89,
+        "fields": {
+            "user": 7,
+            "recipe": 26,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 90,
+        "fields": {
+            "user": 7,
+            "recipe": 27,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 91,
+        "fields": {
+            "user": 7,
+            "recipe": 32,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 92,
+        "fields": {
+            "user": 7,
+            "recipe": 37,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 93,
+        "fields": {
+            "user": 7,
+            "recipe": 38,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 94,
+        "fields": {
+            "user": 7,
+            "recipe": 40,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 95,
+        "fields": {
+            "user": 8,
+            "recipe": 6,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 96,
+        "fields": {
+            "user": 8,
+            "recipe": 40,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 97,
+        "fields": {
+            "user": 8,
+            "recipe": 8,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 98,
+        "fields": {
+            "user": 8,
+            "recipe": 12,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 99,
+        "fields": {
+            "user": 8,
+            "recipe": 14,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 100,
+        "fields": {
+            "user": 8,
+            "recipe": 17,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 101,
+        "fields": {
+            "user": 8,
+            "recipe": 18,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 102,
+        "fields": {
+            "user": 8,
+            "recipe": 23,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 103,
+        "fields": {
+            "user": 8,
+            "recipe": 25,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 104,
+        "fields": {
+            "user": 8,
+            "recipe": 27,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 105,
+        "fields": {
+            "user": 9,
+            "recipe": 33,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 106,
+        "fields": {
+            "user": 9,
+            "recipe": 3,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 107,
+        "fields": {
+            "user": 9,
+            "recipe": 36,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 108,
+        "fields": {
+            "user": 9,
+            "recipe": 4,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 109,
+        "fields": {
+            "user": 9,
+            "recipe": 38,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 110,
+        "fields": {
+            "user": 9,
+            "recipe": 12,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 111,
+        "fields": {
+            "user": 9,
+            "recipe": 13,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 112,
+        "fields": {
+            "user": 9,
+            "recipe": 24,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 113,
+        "fields": {
+            "user": 10,
+            "recipe": 32,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 114,
+        "fields": {
+            "user": 10,
+            "recipe": 1,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 115,
+        "fields": {
+            "user": 10,
+            "recipe": 35,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 116,
+        "fields": {
+            "user": 10,
+            "recipe": 36,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 117,
+        "fields": {
+            "user": 10,
+            "recipe": 15,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 118,
+        "fields": {
+            "user": 10,
+            "recipe": 17,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 119,
+        "fields": {
+            "user": 10,
+            "recipe": 31,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 120,
+        "fields": {
+            "user": 11,
+            "recipe": 1,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 121,
+        "fields": {
+            "user": 11,
+            "recipe": 2,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 122,
+        "fields": {
+            "user": 11,
+            "recipe": 4,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 123,
+        "fields": {
+            "user": 11,
+            "recipe": 6,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 124,
+        "fields": {
+            "user": 11,
+            "recipe": 10,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 125,
+        "fields": {
+            "user": 11,
+            "recipe": 13,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 126,
+        "fields": {
+            "user": 11,
+            "recipe": 14,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 127,
+        "fields": {
+            "user": 11,
+            "recipe": 15,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 128,
+        "fields": {
+            "user": 11,
+            "recipe": 17,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 129,
+        "fields": {
+            "user": 11,
+            "recipe": 18,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 130,
+        "fields": {
+            "user": 11,
+            "recipe": 20,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 131,
+        "fields": {
+            "user": 11,
+            "recipe": 21,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 132,
+        "fields": {
+            "user": 11,
+            "recipe": 23,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 133,
+        "fields": {
+            "user": 11,
+            "recipe": 24,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 134,
+        "fields": {
+            "user": 11,
+            "recipe": 25,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 135,
+        "fields": {
+            "user": 11,
+            "recipe": 26,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 136,
+        "fields": {
+            "user": 11,
+            "recipe": 27,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 137,
+        "fields": {
+            "user": 11,
+            "recipe": 28,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 138,
+        "fields": {
+            "user": 11,
+            "recipe": 31,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 139,
+        "fields": {
+            "user": 11,
+            "recipe": 33,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 140,
+        "fields": {
+            "user": 11,
+            "recipe": 34,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 141,
+        "fields": {
+            "user": 11,
+            "recipe": 35,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 142,
+        "fields": {
+            "user": 11,
+            "recipe": 37,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 143,
+        "fields": {
+            "user": 11,
+            "recipe": 38,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 144,
+        "fields": {
+            "user": 11,
+            "recipe": 39,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 145,
+        "fields": {
+            "user": 11,
+            "recipe": 40,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 146,
+        "fields": {
+            "user": 12,
+            "recipe": 1,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 147,
+        "fields": {
+            "user": 12,
+            "recipe": 2,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 148,
+        "fields": {
+            "user": 12,
+            "recipe": 3,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 149,
+        "fields": {
+            "user": 12,
+            "recipe": 4,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 150,
+        "fields": {
+            "user": 12,
+            "recipe": 6,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 151,
+        "fields": {
+            "user": 12,
+            "recipe": 7,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 152,
+        "fields": {
+            "user": 12,
+            "recipe": 8,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 153,
+        "fields": {
+            "user": 12,
+            "recipe": 9,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 154,
+        "fields": {
+            "user": 12,
+            "recipe": 11,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 155,
+        "fields": {
+            "user": 12,
+            "recipe": 12,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 156,
+        "fields": {
+            "user": 12,
+            "recipe": 14,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 157,
+        "fields": {
+            "user": 12,
+            "recipe": 15,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 158,
+        "fields": {
+            "user": 12,
+            "recipe": 16,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 159,
+        "fields": {
+            "user": 12,
+            "recipe": 19,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 160,
+        "fields": {
+            "user": 12,
+            "recipe": 21,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 161,
+        "fields": {
+            "user": 12,
+            "recipe": 22,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 162,
+        "fields": {
+            "user": 12,
+            "recipe": 23,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 163,
+        "fields": {
+            "user": 12,
+            "recipe": 25,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 164,
+        "fields": {
+            "user": 12,
+            "recipe": 26,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 165,
+        "fields": {
+            "user": 12,
+            "recipe": 27,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 166,
+        "fields": {
+            "user": 12,
+            "recipe": 28,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 167,
+        "fields": {
+            "user": 12,
+            "recipe": 29,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 168,
+        "fields": {
+            "user": 12,
+            "recipe": 30,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 169,
+        "fields": {
+            "user": 12,
+            "recipe": 32,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 170,
+        "fields": {
+            "user": 12,
+            "recipe": 34,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 171,
+        "fields": {
+            "user": 12,
+            "recipe": 36,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 172,
+        "fields": {
+            "user": 12,
+            "recipe": 37,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 173,
+        "fields": {
+            "user": 12,
+            "recipe": 39,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 174,
+        "fields": {
+            "user": 12,
+            "recipe": 40,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 175,
+        "fields": {
+            "user": 13,
+            "recipe": 2,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 176,
+        "fields": {
+            "user": 13,
+            "recipe": 6,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 177,
+        "fields": {
+            "user": 13,
+            "recipe": 9,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 178,
+        "fields": {
+            "user": 13,
+            "recipe": 11,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 179,
+        "fields": {
+            "user": 13,
+            "recipe": 13,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 180,
+        "fields": {
+            "user": 13,
+            "recipe": 14,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 181,
+        "fields": {
+            "user": 13,
+            "recipe": 15,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 182,
+        "fields": {
+            "user": 13,
+            "recipe": 16,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 183,
+        "fields": {
+            "user": 13,
+            "recipe": 18,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 184,
+        "fields": {
+            "user": 13,
+            "recipe": 21,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 185,
+        "fields": {
+            "user": 13,
+            "recipe": 25,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 186,
+        "fields": {
+            "user": 13,
+            "recipe": 27,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 187,
+        "fields": {
+            "user": 13,
+            "recipe": 28,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 188,
+        "fields": {
+            "user": 13,
+            "recipe": 30,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 189,
+        "fields": {
+            "user": 13,
+            "recipe": 31,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 190,
+        "fields": {
+            "user": 13,
+            "recipe": 32,
+            "is_favorited": false,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 191,
+        "fields": {
+            "user": 13,
+            "recipe": 33,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 192,
+        "fields": {
+            "user": 13,
+            "recipe": 34,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 193,
+        "fields": {
+            "user": 13,
+            "recipe": 35,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 194,
+        "fields": {
+            "user": 13,
+            "recipe": 36,
+            "is_favorited": true,
+            "is_in_shopping_cart": true
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 195,
+        "fields": {
+            "user": 13,
+            "recipe": 37,
+            "is_favorited": true,
+            "is_in_shopping_cart": false
+        }
+    },
+    {
+        "model": "recipes.reciperelation",
+        "pk": 196,
+        "fields": {
+            "user": 13,
+            "recipe": 39,
+            "is_favorited": false,
+            "is_in_shopping_cart": false
+        }
+    }
+]
