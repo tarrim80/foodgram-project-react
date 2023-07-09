@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm
@@ -47,6 +48,7 @@ class SubscribeAdmin(admin.ModelAdmin):
     list_display = ('user', 'author')
     list_filter = ('user', 'author')
     search_fields = ('user', 'author')
+    list_per_page = settings.PAGE_SIZE * 5
 
 
 admin.site.register(User, UserAdmin)
