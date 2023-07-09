@@ -1,13 +1,12 @@
 import base64
 
 from django.core.files.base import ContentFile
-from rest_framework import serializers
-from rest_framework.validators import UniqueValidator, UniqueTogetherValidator
-
-from api.validators import username_validator
-from recipes.models import Ingredient, Recipe, RecipeIngredient, Tag
-from users.models import User, Subscribe
 from djoser.serializers import UserSerializer as DjoserSerializer
+from recipes.models import Ingredient, Recipe, RecipeIngredient, Tag
+from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
+
+from users.models import Subscribe, User
 
 
 class Base64ImageField(serializers.ImageField):
