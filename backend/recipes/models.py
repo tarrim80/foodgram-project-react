@@ -24,7 +24,7 @@ class Ingredient(models.Model):
         verbose_name_plural = 'Ингредиенты'
 
     def __str__(self) -> str:
-        return self.name
+        return f'{self.name}, {self.measurement_unit}'
 
 
 class Tag(models.Model):
@@ -116,7 +116,7 @@ class RecipeTag(models.Model):
     Отношение моделей - Многие ко Многим.
     """
 
-    resipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
     tag = models.ForeignKey(Tag,
                             on_delete=models.CASCADE,
@@ -126,15 +126,15 @@ class RecipeTag(models.Model):
     class Meta:
         constraints = (
             models.UniqueConstraint(
-                fields=('resipe', 'tag'),
-                name='resipe_tag'
+                fields=('recipe', 'tag'),
+                name='recipe_tag'
             ),
         )
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
 
     def __str__(self) -> str:
-        return f'{self.tag}_{self.resipe}'
+        return f'{self.tag}_{self.recipe}'
 
 
 class RecipeIngredient(models.Model):
@@ -144,7 +144,7 @@ class RecipeIngredient(models.Model):
     Отношение моделей - Многие ко Многим.
     """
 
-    resipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
     ingredient = models.ForeignKey(Ingredient,
                                    on_delete=models.CASCADE,
@@ -160,15 +160,15 @@ class RecipeIngredient(models.Model):
     class Meta:
         constraints = (
             models.UniqueConstraint(
-                fields=('resipe', 'ingredient'),
-                name='resipe_ingredient'
+                fields=('recipe', 'ingredient'),
+                name='recipe_ingredient'
             ),
         )
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
 
     def __str__(self) -> str:
-        return f'{self.resipe}_{ self.ingredient}'
+        return f'{self.recipe}_{ self.ingredient}'
 
 
 class RecipeRelation(models.Model):
