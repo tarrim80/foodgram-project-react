@@ -1,4 +1,5 @@
 import os
+
 from foodgram_backend.settings.base import BASE_DIR
 
 DATABASES = {
