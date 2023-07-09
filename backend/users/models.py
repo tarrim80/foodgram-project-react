@@ -32,7 +32,9 @@ class User(AbstractUser):
     )
 
     def __str__(self):
-        return f'{self.get_full_name()} ({self.username})'
+        if self.first_name or self.last_name:
+            return self.get_full_name()
+        return self.username
 
 
 class Subscribe(models.Model):
