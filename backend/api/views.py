@@ -1,15 +1,18 @@
+import os
+
 from django.db.models import Sum
 from django.http import FileResponse
 from djoser.views import UserViewSet as DjoserViewSet
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
-from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
+from rest_framework.permissions import (SAFE_METHODS,
+                                        IsAuthenticated)
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from api.pagination import PageNumberPaginationLimit
-from api.permission import IsAdminOrReadOnly, IsAuthorOrReadOnly
+from api.permission import IsAdminOrReadOnly, IsAdminOrAuthorOrReadOnly
 from api.serializers import (IngredientSerializer,
                              RecipeCreateUpdateSerializer,
                              RecipeMinifiedSerializer, RecipeSerializer,
@@ -92,7 +95,7 @@ class IngredientViewSet(ReadOnlyModelViewSet):
 class RecipeViewSet(ModelViewSet):
     """Представление рецептов."""
     serializer_class = RecipeSerializer
-    permission_classes = (IsAuthorOrReadOnly, IsAdminOrReadOnly)
+    permission_classes = (IsAdminOrReadOnly, IsAdminOrAuthorOrReadOnly)
     pagination_class = PageNumberPaginationLimit
     lookup_field = 'id'
 
@@ -198,7 +201,7 @@ class RecipeViewSet(ModelViewSet):
             'error_already_deleted': 'Рецепт уже был удалён из избранного.',
             'error_other': 'Ошибка добавления/удаления рецепта в избранное'
         }
-        return self._favorite_or_shopping_cart(
+        return self.favorite_or_shopping_cart(
             field_name='is_favorited',
             error_messages=error_messages
         )
@@ -215,7 +218,7 @@ class RecipeViewSet(ModelViewSet):
             'error_other': (
                 'Ошибка добавления/удаления рецепта в список покупок')
         }
-        return self._favorite_or_shopping_cart(
+        return self.favorite_or_shopping_cart(
             field_name='is_in_shopping_cart',
             error_messages=error_messages
         )
@@ -250,10 +253,20 @@ class RecipeViewSet(ModelViewSet):
                             content_type='application/pdf',
                             status=status.HTTP_200_OK)
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-
     def get_serializer_class(self):
+        """Определение сериализатора."""
         if self.request.method in SAFE_METHODS:
             return RecipeSerializer
         return RecipeCreateUpdateSerializer
+
+    def perform_create(self, serializer):
+        """Передача текущего пользователя в качестве автора рецепта."""
+        serializer.save(author=self.request.user)
+
+    def destroy(self, request, *args, **kwargs):
+        """Удаление рецепта и его картинки."""
+        obj = self.get_object()
+        if obj.image:
+            os.remove(obj.image.path)
+        self.perform_destroy(obj)
+        return Response(status=status.HTTP_204_NO_CONTENT)
