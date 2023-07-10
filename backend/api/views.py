@@ -10,9 +10,10 @@ from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from api.pagination import PageNumberPaginationLimit
 from api.permission import IsAdminOrReadOnly, IsAuthorOrReadOnly
-from api.serializers import (IngredientSerializer, RecipeMinifiedSerializer,
-                             RecipeSerializer, SubscribeSerializer,
-                             TagSerializer)
+from api.serializers import (IngredientSerializer,
+                             RecipeCreateUpdateSerializer,
+                             RecipeMinifiedSerializer, RecipeSerializer,
+                             SubscribeSerializer, TagSerializer)
 from api.services import create_shopping_file
 from recipes.models import (Ingredient, Recipe, RecipeIngredient,
                             RecipeRelation, Tag)
@@ -23,7 +24,8 @@ class UserViewSet(DjoserViewSet):
     """Представление пользователей."""
     pagination_class = PageNumberPaginationLimit
 
-    def _get_recipes_limit(self):
+    def get_recipes_limit(self):
+        """Получение ограничения на количество рецептов из запроса."""
         recipes_limit = self.request.query_params.get(
             'recipes_limit', None)
         try:
@@ -46,7 +48,7 @@ class UserViewSet(DjoserViewSet):
         )
         if request.method == 'POST' and create_status:
             serialiser = SubscribeSerializer(
-                subscribe, context={'recipes_limit': self._get_recipes_limit()}
+                subscribe, context={'recipes_limit': self.get_recipes_limit()}
             )
             return Response(serialiser.data, status=status.HTTP_201_CREATED)
         elif request.method == 'DELETE' and not create_status:
@@ -59,12 +61,13 @@ class UserViewSet(DjoserViewSet):
 
     @action(detail=False)
     def subscriptions(self, request):
+        """Представление списка подписок."""
         user = request.user
         pages = self.paginate_queryset(Subscribe.objects.filter(
             user=user))
         serializer = SubscribeSerializer(
             pages,
-            context={'recipes_limit': self._get_recipes_limit()},
+            context={'recipes_limit': self.get_recipes_limit()},
             many=True
         )
         return self.get_paginated_response(serializer.data)
@@ -101,7 +104,7 @@ class RecipeViewSet(ModelViewSet):
 
         tags = self.request.query_params.getlist('tags')
         if tags:
-            queryset = queryset.filter(tags__slug__in=tags)
+            queryset = queryset.filter(tags__slug__in=tags).distinct()
 
         author = self.request.query_params.get('author')
         if author:
@@ -136,12 +139,12 @@ class RecipeViewSet(ModelViewSet):
             )
         return queryset
 
-    def _relation_delete(self, relation):
+    def relation_delete(self, relation):
         """Удаление пустых связей."""
         if not relation.is_favorited and not relation.is_in_shopping_cart:
             relation.delete()
 
-    def _favorite_or_shopping_cart(self, field_name, error_messages):
+    def favorite_or_shopping_cart(self, field_name, error_messages):
         """Добавление/удаление рецепта в списки."""
         recipe = self.get_object()
         user = self.request.user
@@ -175,7 +178,7 @@ class RecipeViewSet(ModelViewSet):
             else:
                 setattr(relation, field_name, False)
                 relation.save()
-                self._relation_delete(relation)
+                self.relation_delete(relation)
                 return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(
@@ -221,6 +224,7 @@ class RecipeViewSet(ModelViewSet):
             permission_classes=(IsAuthenticated,),
             detail=False)
     def download_shopping_cart(self, request):
+        """Скачивание списка покупок."""
         user = request.user
         queryset = (
             RecipeIngredient.objects.filter(
@@ -245,3 +249,11 @@ class RecipeViewSet(ModelViewSet):
                             as_attachment=True,
                             content_type='application/pdf',
                             status=status.HTTP_200_OK)
+
+    def create(self, request, *args, **kwargs):
+        serializer = RecipeCreateUpdateSerializer(
+            data=request.data,
+            context={'user': request.user})
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
