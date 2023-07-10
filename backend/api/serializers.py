@@ -55,26 +55,6 @@ class IngredientSerializer(serializers.ModelSerializer):
         read_only_fields = ('__all__',)
 
 
-# class IngredientAmountSerializer(serializers.ModelSerializer):
-#     """Сериализатор связи ингредиента и количества."""
-#     id = serializers.ReadOnlyField(source='ingredient.id')
-#     name = serializers.ReadOnlyField(source='ingredient.name')
-#     measurement_unit = serializers.ReadOnlyField(
-#         source='ingredient.measurement_unit'
-#     )
-
-#     class Meta:
-#         model = RecipeIngredient
-#         fields = ('id', 'name', 'measurement_unit', 'amount')
-#         validators = (
-#             UniqueTogetherValidator(
-#                 queryset=RecipeIngredient.objects.all(),
-#                 fields=('ingredient', 'recipe'),
-#                 message='Этот ингредиент уже добавлен!'
-#             ),
-#         )
-
-
 class RecipeSerializer(serializers.ModelSerializer):
     """Сериализатор рецептов (полный)."""
     tags = TagSerializer(many=True)
@@ -91,7 +71,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         fields = ('id', 'tags', 'author', 'ingredients', 'is_favorited',
                   'is_in_shopping_cart', 'name', 'image',
                   'text', 'cooking_time')
-        read_only_fields = ('tags', 'author')
+        read_only_fields = ('__all__',)
 
     def get_ingredients(self, obj):
         """Получение списка ингредиентов с количеством для рецепта."""
@@ -118,7 +98,13 @@ class RecipeSerializer(serializers.ModelSerializer):
         return self.get_realtions_field(obj, field_name='is_in_shopping_cart')
 
 
-class RecipeCreateUpdateSerializer(serializers.Serializer):
+class RecipeCreateUpdateSerializer(RecipeSerializer):
+    author = UserSerializer(read_only=True)
+    tags = serializers.SerializerMethodField()
+
+    def get_tags(self, instance):
+        serializer = TagSerializer(instance.tags.all(), many=True)
+        return serializer.data
 
     def recipe_ingredient_create(self, ingredients, recipe):
         """Формирование связи рецепта и ингредиентов."""
@@ -130,31 +116,23 @@ class RecipeCreateUpdateSerializer(serializers.Serializer):
             )
 
     def validate(self, data):
+        """Проверки данных передаваемых в запросе."""
         valid_data = self.initial_data
-        cooking_time = self.initial_data.get('cooking_time')
-        if cooking_time <= 0:
-            raise ValidationError(
-                'Время приготовления должно быть больше или рано 1')
-
-        tags_data = self.initial_data.get('tags')
+        tags_data = valid_data.pop('tags')
         if not tags_data:
             raise ValidationError('Рецепт должен содержать тэги')
         tags_int = all(isinstance(tag_id, int) for tag_id in tags_data)
         if not tags_int:
             raise ValidationError('Тэги содержат недопустимые данные')
-
-        tags = Tag.objects.filter(id__in=tags_data)
-
-        if tags.count() != len(tags_data):
-            raise ValidationError('Указан несуществующий тэг')
-
+        valid_data['tags'] = tags_data
+        cooking_time = self.initial_data.get('cooking_time')
+        if cooking_time <= 0:
+            raise ValidationError(
+                'Время приготовления должно быть больше или равно 1')
         ingredients = self.initial_data.get('ingredients')
-
         if not ingredients:
             raise ValidationError('Рецепт должен содержать ингредиенты')
-
         ingredients_valid = []
-
         for ingredient in ingredients:
             ing_id = ingredient.get('id')
             ing_exists = Ingredient.objects.filter(id=ing_id).exists()
@@ -171,22 +149,12 @@ class RecipeCreateUpdateSerializer(serializers.Serializer):
                     'Убедитесь, что это значение больше, либо равно единице')
             ingredients_valid.append({'id': ing_id,
                                       'amount': ing_amount})
-
         if not ingredients_valid:
             raise ValidationError('Проверьте ингредиенты')
-
-        # queryset = Ingredient.objects.filter(id__in=ingredients_valid.keys())
-        # if not queryset:
-        #     raise ValidationError('Проверьте ингредиенты')
-
-        # for ingredient in queryset:
-        #     ingredients_valid[ingredient.id] = (
-        #         ingredient, ingredients_valid.get(ingredient.id))
         valid_data.update(
             {
                 'author': self.context.get('user'),
-                'ingredients': ingredients_valid,
-                'tags': tags
+                'ingredients': ingredients_valid
             }
         )
         return valid_data
@@ -198,9 +166,15 @@ class RecipeCreateUpdateSerializer(serializers.Serializer):
         recipe = Recipe.objects.create(**validated_data)
         recipe.tags.set(tags)
         self.recipe_ingredient_create(recipe=recipe, ingredients=ingredients)
-        serializer = RecipeSerializer(recipe)
-        response_data = serializer.to_representation(recipe)
-        return response_data
+        return recipe
+
+    # def to_representation(self, instance):
+    #     representation = super().to_representation(instance)
+    #     user = self.context.get('request').user
+    #     # # print(self.context.get('request'))
+    #     # author_represent = UserSerializer(user, read_only=True).data
+    #     representation['author'] = author_represent
+    #     return representation
 
     # def update(self, instance, validated_data):
     #     instance.image = validated_data.get('image', instance.image)
