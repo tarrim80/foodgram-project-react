@@ -3,10 +3,10 @@ import base64
 from django.core.files.base import ContentFile
 from django.db.models import F
 from djoser.serializers import UserSerializer as DjoserSerializer
-from recipes.models import Ingredient, Recipe, RecipeIngredient, Tag
 from rest_framework import serializers
 from rest_framework.validators import ValidationError
 
+from recipes.models import Ingredient, Recipe, RecipeIngredient, Tag
 from users.models import Subscribe, User
 
 
@@ -132,6 +132,11 @@ class RecipeCreateUpdateSerializer(RecipeSerializer):
         valid_data['tags'] = tags_data
 
         cooking_time = self.initial_data.get('cooking_time')
+        try:
+            cooking_time = int(cooking_time)
+        except ValueError:
+            raise ValidationError(
+                'Недопустимое время приготовления')
         if cooking_time <= 0:
             raise ValidationError(
                 'Время приготовления должно быть больше или равно 1')
