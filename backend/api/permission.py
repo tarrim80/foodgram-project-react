@@ -1,7 +1,7 @@
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 
-class IsAdminOrAuthorOrReadOnly(BasePermission):
+class IsAuthorOrAdminOnly(BasePermission):
     """
     Доступно автору рецепта и администратору для изменения,
     а остальным для чтения.
@@ -9,13 +9,20 @@ class IsAdminOrAuthorOrReadOnly(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return request.method in SAFE_METHODS or (
-            obj.author == request.user
-        ) or request.user and request.user.is_staff
+            request.user.is_authenticated and (
+                request.user == obj.author or request.user.is_staff))
+
+
+class IsCreateOrAdminOnly(BasePermission):
+    """Доступно администратору или авторизованному для создания."""
+
+    def has_permission(self, request, view):
+        return (request.method in SAFE_METHODS or request.method == 'POST'
+                or request.user.is_authenticated and request.user.is_staff)
 
 
 class IsAdminOrReadOnly(BasePermission):
-    """Доступно администратору для изменения и остальным для чтения."""
-
-    def has_permission(self, request, view):
-        return (request.method in SAFE_METHODS
-                or request.user and request.user.is_staff)
+    def has_object_permission(self, request, view, obj):
+        """Доступно администратору для создания, редактирования и удаления."""
+        return request.method in SAFE_METHODS or (request.user.is_authenticated
+                                                  and request.user.is_staff)
