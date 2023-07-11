@@ -1,6 +1,7 @@
 import os
 
 from django.db.models import Sum
+from django_filters.rest_framework import DjangoFilterBackend
 from django.http import FileResponse
 from djoser.views import UserViewSet as DjoserViewSet
 from rest_framework import status
@@ -11,8 +12,9 @@ from rest_framework.permissions import (SAFE_METHODS,
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
+from api.filters import IngredientFilter
 from api.pagination import PageNumberPaginationLimit
-from api.permission import IsAdminOrReadOnly, IsAdminOrAuthorOrReadOnly
+from api.permission import IsCreateOrAdminOnly, IsAuthorOrAdminOnly
 from api.serializers import (IngredientSerializer,
                              RecipeCreateUpdateSerializer,
                              RecipeMinifiedSerializer, RecipeSerializer,
@@ -80,14 +82,12 @@ class TagViewSet(ReadOnlyModelViewSet):
     """Представление тегов."""
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
 
 class IngredientViewSet(ReadOnlyModelViewSet):
     """Представление ингредиентов."""
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
-    permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (SearchFilter,)
     search_fields = ('name',)
 
@@ -95,8 +95,12 @@ class IngredientViewSet(ReadOnlyModelViewSet):
 class RecipeViewSet(ModelViewSet):
     """Представление рецептов."""
     serializer_class = RecipeSerializer
-    permission_classes = (IsAdminOrReadOnly, IsAdminOrAuthorOrReadOnly)
+    permission_classes = [IsCreateOrAdminOnly | IsAuthorOrAdminOnly]
     pagination_class = PageNumberPaginationLimit
+    filter_backends = (DjangoFilterBackend, SearchFilter)
+    fiterset_class = IngredientFilter
+    filterset_fields = ('author',)
+    search_fields = ('name', 'text', 'ingredients__name', 'tags__name')
     lookup_field = 'id'
 
     def get_queryset(self):
@@ -108,10 +112,6 @@ class RecipeViewSet(ModelViewSet):
         tags = self.request.query_params.getlist('tags')
         if tags:
             queryset = queryset.filter(tags__slug__in=tags).distinct()
-
-        author = self.request.query_params.get('author')
-        if author:
-            queryset = queryset.filter(author=author)
 
         if self.request.user.is_anonymous:
             return queryset
