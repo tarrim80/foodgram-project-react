@@ -13,7 +13,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'secret_key_public')
 DEVELOPMENT_STATUS = os.getenv('DEVELOPMENT_STATUS', 'PRODUCTION')
 DEBUG = DEVELOPMENT_STATUS != 'PRODUCTION'
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '[*]')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '[*]').split(' ')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
