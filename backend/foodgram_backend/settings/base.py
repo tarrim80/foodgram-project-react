@@ -31,9 +31,9 @@ INSTALLED_APPS = [
     'djoser',
 
     # apps
-    'api',
-    'users',
-    'recipes',
+    'api.apps.ApiConfig',
+    'recipes.apps.RecipesConfig',
+    'users.apps.UsersConfig',
 ]
 
 
