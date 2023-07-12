@@ -16,7 +16,7 @@ from api.filters import IngredientFilter
 from api.pagination import PageNumberPaginationLimit
 from api.permission import IsCreateOrAdminOnly, IsAuthorOrAdminOnly
 from api.serializers import (IngredientSerializer,
-                             RecipeCreateUpdateSerializer,
+                             #  RecipeCreateUpdateSerializer,
                              RecipeMinifiedSerializer, RecipeSerializer,
                              SubscribeSerializer, TagSerializer)
 from api.services import create_shopping_file
@@ -196,7 +196,7 @@ class RecipeViewSet(ModelViewSet):
         """Добавление/удаление рецепта в избранное."""
         error_messages = {
             'error_yourself': (
-                'Добавлять в избранное собственный рецепт - моветон.'),
+                'Нельзя добавить в избранное свой рецепт.'),
             'error_already_added': 'Рецепт уже был добавлен в избранное.',
             'error_already_deleted': 'Рецепт уже был удалён из избранного.',
             'error_other': 'Ошибка добавления/удаления рецепта в избранное'
@@ -253,11 +253,11 @@ class RecipeViewSet(ModelViewSet):
                             content_type='application/pdf',
                             status=status.HTTP_200_OK)
 
-    def get_serializer_class(self):
-        """Определение сериализатора."""
-        if self.request.method in SAFE_METHODS:
-            return RecipeSerializer
-        return RecipeCreateUpdateSerializer
+    # def get_serializer_class(self):
+    #     """Определение сериализатора."""
+    #     if self.request.method in SAFE_METHODS:
+    #         return RecipeSerializer
+    #     return RecipeCreateUpdateSerializer
 
     def perform_create(self, serializer):
         """Передача текущего пользователя в качестве автора рецепта."""
