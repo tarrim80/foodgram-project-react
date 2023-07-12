@@ -1,6 +1,5 @@
 import base64
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.base import ContentFile
 from django.core.validators import MinValueValidator
 from django.db.models import F
@@ -65,10 +64,7 @@ class IngredientSerializer(serializers.ModelSerializer):
 
 class RecipeSerializer(serializers.ModelSerializer):
     """Сериализатор рецептов (полный)."""
-    tags = TagSerializer(many=True, read_only=True)
-    # tags = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    # ingredients = IngredientAmountSerializer(
-    #     source='recipeingredient_set', many=True)
+    tags = TagSerializer(many=True)
     image = Base64ImageField()
     cooking_time = serializers.IntegerField(
         validators=(
@@ -86,7 +82,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         fields = ('id', 'tags', 'author', 'ingredients', 'is_favorited',
                   'is_in_shopping_cart', 'name', 'image',
                   'text', 'cooking_time')
-        # read_only_fields = ('__all__',)
+        read_only_fields = ('__all__',)
 
     def get_ingredients(self, obj):
         """Получение списка ингредиентов с количеством для рецепта."""
@@ -100,7 +96,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         user = self.context.get('request').user
         try:
             relation = obj.relations.get(user=user)
-        except ObjectDoesNotExist:
+        except Exception:
             return False
         return getattr(relation, field_name)
 
@@ -111,17 +107,6 @@ class RecipeSerializer(serializers.ModelSerializer):
     def get_is_in_shopping_cart(self, obj):
         """Рецепт находится в списке покупок."""
         return self.get_realtions_field(obj, field_name='is_in_shopping_cart')
-
-
-# class RecipeCreateUpdateSerializer(RecipeSerializer):
-#     """Сериализатор создания и обновления рецептов."""
-#     author = UserSerializer(read_only=True)
-#     tags = serializers.SerializerMethodField()
-#     image = Base64ImageField(required=True)
-
-    # def get_tags(self, instance):
-    #     serializer = TagSerializer(instance.tags.all(), many=True)
-    #     return serializer.data
 
     def recipe_ingredient_create(self, ingredients, recipe):
         """Формирование связи рецепта и ингредиентов."""

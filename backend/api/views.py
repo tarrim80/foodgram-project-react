@@ -1,27 +1,25 @@
 import os
 
+from api.filters import IngredientNameFilter
+from api.pagination import PageNumberPaginationLimit
+from api.permission import (IsAdminOrReadOnly, IsAuthorOrAdminOnly,
+                            IsCreateOrAdminOnly)
+from api.serializers import (IngredientSerializer, RecipeMinifiedSerializer,
+                             RecipeSerializer, SubscribeSerializer,
+                             TagSerializer)
+from api.services import create_shopping_file
 from django.db.models import Sum
-from django_filters.rest_framework import DjangoFilterBackend
 from django.http import FileResponse
+from django_filters.rest_framework import DjangoFilterBackend
 from djoser.views import UserViewSet as DjoserViewSet
+from recipes.models import (Ingredient, Recipe, RecipeIngredient,
+                            RecipeRelation, Tag)
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
-from rest_framework.permissions import (SAFE_METHODS,
-                                        IsAuthenticated)
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-
-from api.filters import IngredientFilter
-from api.pagination import PageNumberPaginationLimit
-from api.permission import IsCreateOrAdminOnly, IsAuthorOrAdminOnly
-from api.serializers import (IngredientSerializer,
-                             #  RecipeCreateUpdateSerializer,
-                             RecipeMinifiedSerializer, RecipeSerializer,
-                             SubscribeSerializer, TagSerializer)
-from api.services import create_shopping_file
-from recipes.models import (Ingredient, Recipe, RecipeIngredient,
-                            RecipeRelation, Tag)
 from users.models import Subscribe
 
 
@@ -82,14 +80,16 @@ class TagViewSet(ReadOnlyModelViewSet):
     """Представление тегов."""
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class IngredientViewSet(ReadOnlyModelViewSet):
     """Представление ингредиентов."""
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('name',)
+    permission_classes = (IsAdminOrReadOnly,)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = IngredientNameFilter
 
 
 class RecipeViewSet(ModelViewSet):
@@ -98,7 +98,6 @@ class RecipeViewSet(ModelViewSet):
     permission_classes = [IsCreateOrAdminOnly | IsAuthorOrAdminOnly]
     pagination_class = PageNumberPaginationLimit
     filter_backends = (DjangoFilterBackend, SearchFilter)
-    fiterset_class = IngredientFilter
     filterset_fields = ('author',)
     search_fields = ('name', 'text', 'ingredients__name', 'tags__name')
     lookup_field = 'id'
