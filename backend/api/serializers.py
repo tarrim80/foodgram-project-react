@@ -39,6 +39,13 @@ class UserSerializer(DjoserSerializer):
         return False if user.is_anonymous else Subscribe.objects.filter(
             author=obj.id, user=user).exists()
 
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+
 
 class TagSerializer(serializers.ModelSerializer):
     """Сериализатор тегов."""
@@ -115,7 +122,6 @@ class RecipeSerializer(serializers.ModelSerializer):
     # def get_tags(self, instance):
     #     serializer = TagSerializer(instance.tags.all(), many=True)
     #     return serializer.data
-
 
     def recipe_ingredient_create(self, ingredients, recipe):
         """Формирование связи рецепта и ингредиентов."""
