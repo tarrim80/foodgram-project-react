@@ -5,7 +5,7 @@
         "fields": {
             "first_name": "Анна",
             "last_name": "Синицына",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "anna_sinitsyna",
             "email": "anna_sinitsyna@f.fake"
         }
@@ -16,7 +16,7 @@
         "fields": {
             "first_name": "Евгений",
             "last_name": "Москвин",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "evgenij_moskvin",
             "email": "evgenij_moskvin@f.fake"
         }
@@ -27,7 +27,7 @@
         "fields": {
             "first_name": "Елизавета",
             "last_name": "foodru",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "elizaveta_foodru",
             "email": "elizaveta_foodru@f.fake"
         }
@@ -38,7 +38,7 @@
         "fields": {
             "first_name": "Екатерина",
             "last_name": "foodru",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "ekaterina_foodru",
             "email": "ekaterina_foodru@f.fake"
         }
@@ -49,7 +49,7 @@
         "fields": {
             "first_name": "Денис",
             "last_name": "Семенов",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "denis_semenov",
             "email": "denis_semenov@f.fake"
         }
@@ -60,7 +60,7 @@
         "fields": {
             "first_name": "Ксения",
             "last_name": "foodru",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "ksenija_foodru",
             "email": "ksenija_foodru@f.fake"
         }
@@ -71,7 +71,7 @@
         "fields": {
             "first_name": "Алина",
             "last_name": "Бирюкова",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "alina_birjukova",
             "email": "alina_birjukova@f.fake"
         }
@@ -82,7 +82,7 @@
         "fields": {
             "first_name": "Софья",
             "last_name": "Глухова",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "sof'ja_gluhova",
             "email": "sof'ja_gluhova@f.fake"
         }
@@ -93,7 +93,7 @@
         "fields": {
             "first_name": "Друже",
             "last_name": "Обломов",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "druzhe_oblomov",
             "email": "druzhe_oblomov@f.fake"
         }
@@ -104,7 +104,7 @@
         "fields": {
             "first_name": "Ольга",
             "last_name": "foodru",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "ol'ga_foodru",
             "email": "ol'ga_foodru@f.fake"
         }
@@ -115,7 +115,7 @@
         "fields": {
             "first_name": "Елена",
             "last_name": "foodru",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "elena_foodru",
             "email": "elena_foodru@f.fake"
         }
@@ -126,7 +126,7 @@
         "fields": {
             "first_name": "Мадина",
             "last_name": "Гайнулина",
-            "password": "123QwerY45",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
             "username": "madina_gajnulina",
             "email": "madina_gajnulina@f.fake"
         }
