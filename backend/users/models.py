@@ -27,7 +27,8 @@ class User(AbstractUser):
     is_staff = models.BooleanField(
         'администратор',
         default=False,
-        help_text='Отметьте, если пользователь владеет правами администратора',
+        help_text=_(
+            'Designates whether the user can log into this admin site.'),
     )
 
     def __str__(self):
