@@ -4,6 +4,7 @@ import operator
 import os
 
 from django.conf import settings
+
 from fpdf import FPDF
 
 
@@ -25,6 +26,7 @@ class FoodgramPDF(FPDF):
 
         self.add_font('Montserrat', '',
                       os.path.join(settings.BASE_DIR,
+
                                    'media',
                                    'fonts',
                                    'Montserrat-Regular.ttf'))
