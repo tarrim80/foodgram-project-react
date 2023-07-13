@@ -3,7 +3,7 @@ import io
 import operator
 import os
 
-from foodgram_backend.settings import base
+from django.conf import settings
 from fpdf import FPDF
 
 
@@ -24,22 +24,22 @@ class FoodgramPDF(FPDF):
         self.v_gap = v_gap
 
         self.add_font('Montserrat', '',
-                      os.path.join(base.BASE_DIR,
+                      os.path.join(settings.BASE_DIR,
                                    'media',
                                    'fonts',
                                    'Montserrat-Regular.ttf'))
         self.add_font('Montserrat', 'I',
-                      os.path.join(base.BASE_DIR,
+                      os.path.join(settings.BASE_DIR,
                                    'media',
                                    'fonts',
                                    'Montserrat-Italic.ttf'))
         self.add_font('Montserrat', 'B',
-                      os.path.join(base.BASE_DIR,
+                      os.path.join(settings.BASE_DIR,
                                    'media',
                                    'fonts',
                                    'Montserrat-Bold.ttf'))
         self.add_font('Montserrat', 'BI',
-                      os.path.join(base.BASE_DIR,
+                      os.path.join(settings.BASE_DIR,
                                    'media',
                                    'fonts',
                                    'Montserrat-BoldItalic.ttf'))
@@ -84,7 +84,7 @@ class FoodgramPDF(FPDF):
         self.cell(page_no_width - 8, footer_height, page_no_str,
                   fill=True, align='R')
         self.cell(8, footer_height, fill=True)
-        self.image(os.path.join(base.BASE_DIR,
+        self.image(os.path.join(settings.BASE_DIR,
                                 'media',
                                 'logo',
                                 'favicon.png'),
