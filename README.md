@@ -46,7 +46,7 @@
 Для модели ингредиентов включена фильтрация по названию.
 
 ## Документация API
-Полробная документация по работе API сервиса доступна по адресу: [localhost/api/docs/](http://localhost/api/docs/)
+Полробная документация по работе API сервиса будет доступна после запуска по адресу: [localhost/api/docs/](http://localhost/api/docs/)
 
 ## Подстановочные (фиктивные) данные
 В репозитории доступна папка ```mock_data``` с файлами содержащими данные о рецептах, спарсенных с сайта [food.ru](https://food.ru). Данные распространяются только в ознакомительных целях. Все права принадлежат правообладателям. Подгрузка данных при первом запуске произойдет автоматически. В остальных случаях подгрузить данные можно командой:
@@ -91,7 +91,7 @@ sudo docker compose exec backend python manage.py migrate
 ```
 sudo docker compose exec backend python manage.py collectstatic
 ```
-Скопировать собранную статикуЖ
+Скопировать собранную статику:
 ```
 sudo docker compose exec backend cp -r /app/collected_static/. /kittygram_backend_static/static/
 ```
