@@ -84,7 +84,10 @@ class FoodgramPDF(FPDF):
         self.cell(page_no_width - 8, footer_height, page_no_str,
                   fill=True, align='R')
         self.cell(8, footer_height, fill=True)
-        self.image('backend/media/logo/favicon.png',
+        self.image(os.path.join(base.BASE_DIR,
+                                'media',
+                                'logo',
+                                'favicon.png'),
                    w=img_width,
                    keep_aspect_ratio=True,
                    x=img_cell_width - img_width - 5,
