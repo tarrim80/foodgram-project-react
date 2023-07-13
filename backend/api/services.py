@@ -85,7 +85,7 @@ class FoodgramPDF(FPDF):
         self.cell(page_no_width - 8, footer_height, page_no_str,
                   fill=True, align='R')
         self.cell(8, footer_height, fill=True)
-        self.image(os.path.join(base.BASE_DIR, 'media', 'logo', 'favicon.png'),
+        self.image('backend/media/logo/favicon.png',
                    w=img_width,
                    keep_aspect_ratio=True,
                    x=img_cell_width - img_width - 5,
@@ -104,7 +104,8 @@ class FoodgramPDF(FPDF):
         longest_value = []
         for i in range(itemset_col_count):
             func = operator.itemgetter(i)
-            longest_value.append(max(map(func, itemset), key=len))
+            longest_value.append(
+                max(map(func, itemset), key=self.get_string_width))
         longest_value_index = longest_value.index(max(longest_value, key=len))
 
         column_idx_offset = 1
