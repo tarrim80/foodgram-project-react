@@ -130,3 +130,18 @@ dmypy.json
 
 # .idea
 .idea
+
+# vscode
+.vscode
+
+#static
+collected_static/
+
+#media
+# media/
+
+# requests
+*.http
+
+# tests (ignored temporary)
+tests/

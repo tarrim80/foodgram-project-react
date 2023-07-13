@@ -1,0 +1,29 @@
+[
+    {
+        "model": "recipes.tag",
+        "pk": 1,
+        "fields": {
+            "name": "Завтрак",
+            "color": "#FF0000",
+            "slug": "zavtrak"
+        }
+    },
+    {
+        "model": "recipes.tag",
+        "pk": 2,
+        "fields": {
+            "name": "Обед",
+            "color": "#26FF07",
+            "slug": "obed"
+        }
+    },
+    {
+        "model": "recipes.tag",
+        "pk": 3,
+        "fields": {
+            "name": "Ужин",
+            "color": "#2A1AFF",
+            "slug": "uzhin"
+        }
+    }
+]

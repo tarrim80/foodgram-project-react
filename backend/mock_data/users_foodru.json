@@ -1,0 +1,134 @@
+[
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "first_name": "Анна",
+            "last_name": "Синицына",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "anna_sinitsyna",
+            "email": "anna_sinitsyna@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 3,
+        "fields": {
+            "first_name": "Евгений",
+            "last_name": "Москвин",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "evgenij_moskvin",
+            "email": "evgenij_moskvin@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 4,
+        "fields": {
+            "first_name": "Елизавета",
+            "last_name": "foodru",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "elizaveta_foodru",
+            "email": "elizaveta_foodru@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 5,
+        "fields": {
+            "first_name": "Екатерина",
+            "last_name": "foodru",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "ekaterina_foodru",
+            "email": "ekaterina_foodru@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 6,
+        "fields": {
+            "first_name": "Денис",
+            "last_name": "Семенов",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "denis_semenov",
+            "email": "denis_semenov@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 7,
+        "fields": {
+            "first_name": "Ксения",
+            "last_name": "foodru",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "ksenija_foodru",
+            "email": "ksenija_foodru@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 8,
+        "fields": {
+            "first_name": "Алина",
+            "last_name": "Бирюкова",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "alina_birjukova",
+            "email": "alina_birjukova@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 9,
+        "fields": {
+            "first_name": "Софья",
+            "last_name": "Глухова",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "sof'ja_gluhova",
+            "email": "sof'ja_gluhova@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 10,
+        "fields": {
+            "first_name": "Друже",
+            "last_name": "Обломов",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "druzhe_oblomov",
+            "email": "druzhe_oblomov@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 11,
+        "fields": {
+            "first_name": "Ольга",
+            "last_name": "foodru",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "ol'ga_foodru",
+            "email": "ol'ga_foodru@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 12,
+        "fields": {
+            "first_name": "Елена",
+            "last_name": "foodru",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "elena_foodru",
+            "email": "elena_foodru@f.fake"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 13,
+        "fields": {
+            "first_name": "Мадина",
+            "last_name": "Гайнулина",
+            "password": "pbkdf2_sha256$260000$CtL2vcjTMhN8n3CTGO0aVe$73sO7P0eeg3ox/JpUUMTaBiSFKaBq8EDhb0YfjFThZk=",
+            "username": "madina_gajnulina",
+            "email": "madina_gajnulina@f.fake"
+        }
+    }
+]
