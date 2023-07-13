@@ -93,7 +93,7 @@ sudo docker compose exec backend python manage.py collectstatic
 ```
 Скопировать собранную статику:
 ```
-sudo docker compose exec backend cp -r /app/collected_static/. /kittygram_backend_static/static/
+sudo docker compose exec backend cp -r /app/collected_static/. /foodgram_backend_static/static/
 ```
 
 ---
