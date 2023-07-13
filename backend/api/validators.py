@@ -7,9 +7,11 @@ def username_validator(username):
     """
     Проверка uername пользователя.
     """
-    pattern = r'^[\w.@+-]+$'
+    pattern = r"^[\w.@+-]+$"
     if not re.match(pattern, username):
-        message = ('Username can only contain letters, '
-                   'numbers, and the following symbols: '
-                   '. @ + - _')
+        message = (
+            "Username can only contain letters, "
+            "numbers, and the following symbols: "
+            ". @ + - _"
+        )
         raise ValidationError(message)

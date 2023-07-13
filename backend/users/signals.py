@@ -20,7 +20,7 @@ def assign_admin_group(sender, instance, **kwargs):
     Добавление пользователя в группу Администраторов или удаление из неё
     в зависимости от состояния свойства `is_staff`.
     """
-    admin_group, _ = Group.objects.get_or_create(name='Администраторы')
+    admin_group, _ = Group.objects.get_or_create(name="Администраторы")
     if instance.is_staff:
         instance.groups.add(admin_group)
     else:
@@ -41,10 +41,10 @@ def load_mock_data(sender, **kwargs):
     миграции моделей приложений `users` и `recipes` и только в процессе
     разработки.
     """
-    if os.getenv('DEVELOPMENT_STATUS') == 'PRODUCTION':
+    if os.getenv("DEVELOPMENT_STATUS") == "PRODUCTION":
         return
 
-    if sender.name != 'users':
+    if sender.name != "users":
         return
 
     migration_recorder = MigrationRecorder(connection)
@@ -52,42 +52,41 @@ def load_mock_data(sender, **kwargs):
 
     appropriate_entries = []
     for migration in applied_migrations.values():
-        if migration.app in ('users', 'recipes'):
+        if migration.app in ("users", "recipes"):
             appropriate_entries.append(migration)
 
     migration_names, migration_times = [], []
     for entry in appropriate_entries:
-        migration_names.append(entry.name.split('_')[-1])
+        migration_names.append(entry.name.split("_")[-1])
         migration_times.append(entry.applied.replace(tzinfo=None))
 
     time_last_migration = max(time for time in migration_times)
     time_since_last_migration = (
-        dt.utcnow() - time_last_migration).total_seconds()
-    time_is_appropriate = (
-        time_since_last_migration < MIGRATION_LIFETIME
-    )
+        dt.utcnow() - time_last_migration
+    ).total_seconds()
+    time_is_appropriate = time_since_last_migration < MIGRATION_LIFETIME
 
     if not time_is_appropriate:
         return
 
-    if not all(name == 'initial' for name in migration_names):
+    if not all(name == "initial" for name in migration_names):
         sys.stdout.write(
-            'Фиктивные данные могут быть загружены '
-            'только после первой миграции пользовательских моделей! \n'
+            "Фиктивные данные могут быть загружены "
+            "только после первой миграции пользовательских моделей! \n"
         )
         return
 
-    data_dir = settings.BASE_DIR / 'mock_data'
-    fixture_files = list(os.path.join(data_dir, file)
-                         for file in os.listdir(data_dir))
-    call_command(
-        'loaddata', *fixture_files)
+    data_dir = settings.BASE_DIR / "mock_data"
+    fixture_files = list(
+        os.path.join(data_dir, file) for file in os.listdir(data_dir)
+    )
+    call_command("loaddata", *fixture_files)
 
 
 def set_admin_permissions(sender, **kwargs):
     """Установка прав администраторов после обновления БД."""
     # if sender.name == 'django.contrib.auth':
-    admin_group, _ = Group.objects.get_or_create(name='Администраторы')
+    admin_group, _ = Group.objects.get_or_create(name="Администраторы")
     admin_group.save()
 
     permissions = Permission.objects.all()
