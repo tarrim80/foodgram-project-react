@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.template.defaultfilters import truncatewords
 from django.utils.safestring import mark_safe
-
 from recipes.models import (Ingredient, Recipe, RecipeIngredient,
                             RecipeRelation, RecipeTag, Tag)
 

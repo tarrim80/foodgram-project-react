@@ -252,12 +252,6 @@ class RecipeViewSet(ModelViewSet):
                             content_type='application/pdf',
                             status=status.HTTP_200_OK)
 
-    # def get_serializer_class(self):
-    #     """Определение сериализатора."""
-    #     if self.request.method in SAFE_METHODS:
-    #         return RecipeSerializer
-    #     return RecipeCreateUpdateSerializer
-
     def perform_create(self, serializer):
         """Передача текущего пользователя в качестве автора рецепта."""
         serializer.save(author=self.request.user)

@@ -3,9 +3,8 @@ import io
 import operator
 import os
 
-from fpdf import FPDF
-
 from foodgram_backend.settings import base
+from fpdf import FPDF
 
 
 class FoodgramPDF(FPDF):

@@ -1,15 +1,14 @@
 import os
 import sys
-
 from datetime import datetime as dt
+
 from django.conf import settings
 from django.contrib.auth.models import Group, Permission
+from django.core.management import call_command
 from django.db import connection
 from django.db.migrations.recorder import MigrationRecorder
-from django.core.management import call_command
 from django.db.models.signals import post_migrate, post_save
 from django.dispatch import receiver
-
 from users.models import User
 
 MIGRATION_LIFETIME = 30
