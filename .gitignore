@@ -142,3 +142,6 @@ media/
 
 # requests
 *.http
+
+# tests (ignored temporary)
+tests/
