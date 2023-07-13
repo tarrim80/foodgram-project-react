@@ -64,7 +64,7 @@ class IngredientSerializer(serializers.ModelSerializer):
 
 class RecipeSerializer(serializers.ModelSerializer):
     """Сериализатор рецептов (полный)."""
-    tags = TagSerializer(many=True)
+    tags = TagSerializer(many=True, read_only=True)
     image = Base64ImageField()
     cooking_time = serializers.IntegerField(
         validators=(
@@ -82,7 +82,6 @@ class RecipeSerializer(serializers.ModelSerializer):
         fields = ('id', 'tags', 'author', 'ingredients', 'is_favorited',
                   'is_in_shopping_cart', 'name', 'image',
                   'text', 'cooking_time')
-        read_only_fields = ('__all__',)
 
     def get_ingredients(self, obj):
         """Получение списка ингредиентов с количеством для рецепта."""
@@ -170,9 +169,12 @@ class RecipeSerializer(serializers.ModelSerializer):
         """Обновление рецепта."""
         instance.name = validated_data.get('name', instance.name)
         instance.text = validated_data.get('text', instance.text)
-        instance.image = validated_data.get('image')
         instance.cooking_time = validated_data.get(
             'cooking_time', instance.cooking_time)
+
+        if 'image' in validated_data:
+            image = validated_data.get('image')
+            instance.image.save(image.name, image, save=True)
 
         tags_data = validated_data.get('tags')
         if tags_data:
