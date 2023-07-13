@@ -3,7 +3,7 @@ import sys
 
 from datetime import datetime as dt
 from django.conf import settings
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, Permission
 from django.db import connection
 from django.db.migrations.recorder import MigrationRecorder
 from django.core.management import call_command
@@ -19,7 +19,7 @@ MIGRATION_LIFETIME = 30
 def assign_admin_group(sender, instance, **kwargs):
     """
     Добавление пользователя в группу Администраторов или удаление из неё
-    в зависимости от состояния свойства `is_staff`
+    в зависимости от состояния свойства `is_staff`.
     """
     admin_group, _ = Group.objects.get_or_create(name='Администраторы')
     if instance.is_staff:
@@ -29,7 +29,13 @@ def assign_admin_group(sender, instance, **kwargs):
 
 
 @receiver(post_migrate)
-def load_data_after_migration(sender, **kwargs):
+def after_migration(sender, **kwargs):
+    """Сигнал срабатывающий после выполнения миграций БД."""
+    load_mock_data(sender, **kwargs)
+    set_admin_permissions(sender, **kwargs)
+
+
+def load_mock_data(sender, **kwargs):
     """
     Загрузка фиктивных данных спарсенных с сайта `food.ru` для тестирования
     работы ресурса. Загрузка срабатывает только один раз после первой
@@ -77,3 +83,13 @@ def load_data_after_migration(sender, **kwargs):
                          for file in os.listdir(data_dir))
     call_command(
         'loaddata', *fixture_files)
+
+
+def set_admin_permissions(sender, **kwargs):
+    """Установка прав администраторов после обновления БД."""
+    # if sender.name == 'django.contrib.auth':
+    admin_group, _ = Group.objects.get_or_create(name='Администраторы')
+    admin_group.save()
+
+    permissions = Permission.objects.all()
+    admin_group.permissions.set(permissions)
