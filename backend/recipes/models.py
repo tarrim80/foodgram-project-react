@@ -1,4 +1,5 @@
 from colorfield.fields import ColorField
+from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 from users.models import User
@@ -111,7 +112,7 @@ class Recipe(models.Model):
     cooking_time = models.IntegerField(
         verbose_name="Время приготовления",
         help_text="Время приготовления рецепта (в минутах).",
-        validators=(MinValueValidator(1),),
+        validators=(MinValueValidator(settings.MIN_COOKING_TIME),),
     )
     pub_date = models.DateTimeField(
         verbose_name="Дата и время публикации",
@@ -135,7 +136,12 @@ class RecipeTag(models.Model):
     Отношение моделей - Многие ко Многим.
     """
 
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        verbose_name="Рецепт",
+        help_text="Укажите рецепт",
+    )
 
     tag = models.ForeignKey(
         Tag,
@@ -150,8 +156,9 @@ class RecipeTag(models.Model):
                 fields=("recipe", "tag"), name="recipe_tag"
             ),
         )
-        verbose_name = "Тег"
-        verbose_name_plural = "Теги"
+        verbose_name = "Рецепт-Тег"
+        verbose_name_plural = "Рецепты-Теги"
+        default_related_name = "recipetag"
 
     def __str__(self) -> str:
         return f"{self.tag}_{self.recipe}"
@@ -164,19 +171,24 @@ class RecipeIngredient(models.Model):
     Отношение моделей - Многие ко Многим.
     """
 
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        verbose_name="Рецепт",
+        help_text="Выберите рецепт.",
+    )
 
     ingredient = models.ForeignKey(
         Ingredient,
         on_delete=models.CASCADE,
         verbose_name="Ингредиент",
-        help_text="Выберите ингредиенты.",
+        help_text="Выберите ингредиент.",
     )
 
     amount = models.FloatField(
         verbose_name="Количество",
         help_text="Укажите необходимое количество продукта.",
-        validators=(MinValueValidator(1),),
+        validators=(MinValueValidator(settings.MIN_INGREDIENT_AMOUNT),),
     )
 
     class Meta:
@@ -185,8 +197,9 @@ class RecipeIngredient(models.Model):
                 fields=("recipe", "ingredient"), name="recipe_ingredient"
             ),
         )
-        verbose_name = "Ингредиент"
-        verbose_name_plural = "Ингредиенты"
+        verbose_name = "Рецепт-Ингредиент"
+        verbose_name_plural = "Рецепты-Ингредиенты"
+        default_related_name = "recipeingredient"
 
     def __str__(self) -> str:
         return f"{self.recipe}_{ self.ingredient}"

@@ -12,28 +12,28 @@ class FoodgramPDF(FPDF):
 
     def __init__(
         self,
-        side_margin: float,
-        top_margin: float,
-        number_col_need: bool,
-        checkbox_col_need: bool,
-        h_gap: float,
-        v_gap: float,
+        side_margin,
+        top_margin,
+        number_col_need,
+        checkbox_col_need,
+        h_gap,
+        v_gap,
         *args,
         **kwargs,
-    ) -> None:
+    ):
         super().__init__(*args, **kwargs)
 
-        self.side_margin: float = side_margin
-        self.top_margin: float = top_margin
-        self.margins: tuple[float, float, float] = (
+        self.side_margin = side_margin
+        self.top_margin = top_margin
+        self.margins = (
             self.side_margin,
             self.top_margin,
             self.side_margin,
         )
-        self.number_col_need: bool = number_col_need
-        self.checkbox_col_need: bool = checkbox_col_need
-        self.h_gap: float = h_gap
-        self.v_gap: float = v_gap
+        self.number_col_need = number_col_need
+        self.checkbox_col_need = checkbox_col_need
+        self.h_gap = h_gap
+        self.v_gap = v_gap
 
         self.add_font(
             "Montserrat",
@@ -96,8 +96,8 @@ class FoodgramPDF(FPDF):
         self.set_fill_color(0)
         img_cell_width = 25
         img_width = 12
-        page_no_str: str = f"стр. {self.page_no()}"
-        page_no_width: float = self.get_string_width(page_no_str) + 10
+        page_no_str = f"стр. {self.page_no()}"
+        page_no_width = self.get_string_width(page_no_str) + 10
         footer_height = 20
         label = "Продуктовый помощник"
         self.cell(img_cell_width, footer_height, fill=True)
@@ -120,108 +120,97 @@ class FoodgramPDF(FPDF):
         )
         self.set_margins(*self.margins)
 
-    def set_cell_height(self, v_gap: float):
+    def set_cell_height(self, v_gap):
         """Установка высоты ячейки в зависимости от размера шрифта."""
         self.cell_height = self.font_size + v_gap * 2
 
-    def get_column_params(
-        self, itemset, h_gap: float, text_align, cell_border
-    ):
+    def get_column_params(self, itemset, h_gap, text_align, cell_border):
         """Определение параметров столбцов и атрибутов ячеек."""
 
-        itemset_col_count: int = min(len(item) for item in itemset)
-        longest_value = []
-        for i in range(itemset_col_count):
-            func = operator.itemgetter(i)
-            longest_value.append(
-                max(map(func, itemset), key=self.get_string_width)
-            )
-        longest_value_index: int = longest_value.index(
-            max(longest_value, key=len)
-        )
-
-        column_idx_offset = 1
         column_params = {}
 
-        if self.number_col_need:
-            number_col_width = (
-                self.get_string_width(f"{len(itemset)}.") + h_gap
-            )
-            column_idx = column_idx_offset
-            column_params.update(
-                {
-                    column_idx: {
-                        "col_width": number_col_width,
-                        "col_align": "CENTER",
-                        "cell_border": cell_border,
-                        "checkbox_size": None,
-                        "txt_index": "number",
-                        "ln": False,
-                    }
+        col_num_width = self.get_string_width(f"{(itemset).count()}.") + h_gap
+        column_params.update(
+            {
+                1: {
+                    "col_width": col_num_width,
+                    "col_align": "CENTER",
+                    "cell_border": cell_border,
+                    "checkbox_size": None,
+                    "txt_index": "number",
+                    "ln": False,
                 }
-            )
+            }
+        )
 
-        if self.checkbox_col_need:
-            table_columns_count: int = itemset_col_count + (
-                int(self.checkbox_col_need) + int(self.number_col_need)
-            )
-            column_params.update(
-                {
-                    table_columns_count: {
-                        "col_width": self.cell_height,
-                        "col_align": "CENTER",
-                        "cell_border": cell_border,
-                        "checkbox_size": self.font_size,
-                        "txt_index": "checkbox",
-                        "ln": False,
-                    }
+        column_params.update(
+            {
+                5: {
+                    "col_width": self.cell_height,
+                    "col_align": "CENTER",
+                    "cell_border": cell_border,
+                    "checkbox_size": self.font_size,
+                    "txt_index": "checkbox",
+                    "ln": False,
                 }
-            )
+            }
+        )
 
-        for col in range(itemset_col_count):
-            if col != longest_value_index:
-                column_idx = (
-                    col + column_idx_offset + int(self.number_col_need)
-                )
-                col_width: float = (
-                    self.get_string_width(longest_value[col]) + h_gap
-                )
-                col_align = text_align[col]
-                column_params.update(
-                    {
-                        column_idx: {
-                            "col_width": col_width,
-                            "col_align": col_align,
-                            "cell_border": cell_border,
-                            "checkbox_size": None,
-                            "txt_index": col,
-                            "ln": False,
-                        }
-                    }
-                )
+        temp_gen = (item.get("amount__sum") for item in itemset)
+        max_amount_width = max(
+            self.get_string_width(amount) for amount in temp_gen
+        )
+        temp_gen = (
+            item.get("ingredient__measurement_unit") for item in itemset
+        )
+        max_unit_width = max(self.get_string_width(unit) for unit in temp_gen)
+
+        column_params.update(
+            {
+                3: {
+                    "col_width": max_amount_width + h_gap,
+                    "col_align": "RIGHT",
+                    "cell_border": cell_border,
+                    "checkbox_size": None,
+                    "txt_index": "amount__sum",
+                    "ln": False,
+                }
+            }
+        )
+
+        column_params.update(
+            {
+                4: {
+                    "col_width": max_unit_width + h_gap,
+                    "col_align": "LEFT",
+                    "cell_border": cell_border,
+                    "checkbox_size": None,
+                    "txt_index": "ingredient__measurement_unit",
+                    "ln": False,
+                }
+            }
+        )
 
         temp_gen = (i for i in column_params.items())
         func1 = operator.itemgetter(1)
         func2 = operator.itemgetter("col_width")
         columns_widths_list = list((func2(func1(item))) for item in temp_gen)
         columns_width = sum(columns_widths_list)
-        col_longest_width = self.epw - columns_width
-        col_longest_align = text_align[longest_value_index]
-        column_longest_idx = (
-            longest_value_index + column_idx_offset + int(self.number_col_need)
-        )
+        col_name_width = self.epw - columns_width
+
         column_params.update(
             {
-                column_longest_idx: {
-                    "col_width": col_longest_width,
-                    "col_align": col_longest_align,
+                2: {
+                    "col_width": col_name_width,
+                    "col_align": "LEFT",
                     "cell_border": cell_border,
                     "checkbox_size": None,
-                    "txt_index": longest_value_index,
+                    "txt_index": "ingredient__name",
                     "ln": False,
                 }
             }
         )
+
         column_params = sorted(column_params.items())
         column_params[-1][1]["ln"] = True
         return column_params
@@ -251,11 +240,11 @@ def create_shopping_file(itemset):
         text_align=txt_align,
         cell_border=False,
     )
-    for num, item in enumerate(itemset):
+    for num, item in enumerate(itemset, start=1):
         for col in colparams:
             height = pdf.cell_height
             if col[1].get("txt_index") == "number":
-                txt = f"{num + 1}."
+                txt = f"{num}."
             elif col[1].get("txt_index") == "checkbox":
                 txt = " "
                 pdf.rect(

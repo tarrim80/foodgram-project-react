@@ -128,7 +128,17 @@ class RecipeRelationAdmin(admin.ModelAdmin):
     raw_id_fields = ("user", "recipe")
 
 
+class RecipeTagAdmin(admin.ModelAdmin):
+    list_display = ("recipe", "tag")
+
+
+class RecipeIngredientAdmin(admin.ModelAdmin):
+    list_display = ("recipe", "ingredient", "amount")
+
+
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(RecipeRelation, RecipeRelationAdmin)
 admin.site.register(Tag, TagAdmin)
+admin.site.register(RecipeTag, RecipeTagAdmin)
+admin.site.register(RecipeIngredient, RecipeIngredientAdmin)

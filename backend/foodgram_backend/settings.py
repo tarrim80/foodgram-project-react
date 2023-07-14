@@ -180,3 +180,11 @@ if DEBUG:
     MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
 
     INTERNAL_IPS = ("127.0.0.1",)
+
+
+# __________________CONSTANTES________________ #
+
+MIN_COOKING_TIME = 1
+MIN_INGREDIENT_AMOUNT = 1
+
+MIGRATION_LIFETIME_SEC = 30

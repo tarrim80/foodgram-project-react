@@ -1,8 +1,10 @@
 import base64
 
+from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.validators import MinValueValidator
 from django.db.models import F
+from django.db.transaction import atomic
 from djoser.serializers import UserSerializer as DjoserSerializer
 from recipes.models import Ingredient, Recipe, RecipeIngredient, Tag
 from rest_framework import serializers
@@ -24,7 +26,9 @@ class Base64ImageField(serializers.ImageField):
 class UserSerializer(DjoserSerializer):
     """Сериализатор пользователей приложения."""
 
-    is_subscribed = serializers.SerializerMethodField()
+    is_subscribed = serializers.SerializerMethodField(
+        method_name="get_is_subscribed"
+    )
 
     class Meta:
         model = User
@@ -44,11 +48,10 @@ class UserSerializer(DjoserSerializer):
 
     def get_is_subscribed(self, obj) -> bool:
         user = self.context.get("request").user
-        return (
-            False
-            if user.is_anonymous
-            else Subscribe.objects.filter(author=obj.id, user=user).exists()
-        )
+        if user.is_anonymous:
+            return False
+        else:
+            Subscribe.objects.filter(author=obj.id, user=user).exists()
 
     def create(self, validated_data):
         password = validated_data.pop("password")
@@ -84,15 +87,22 @@ class RecipeSerializer(serializers.ModelSerializer):
     cooking_time = serializers.IntegerField(
         validators=(
             MinValueValidator(
-                limit_value=1,
-                message="Время приготовления должно быть больше или равно 1",
+                limit_value=settings.MIN_COOKING_TIME,
+                message=f"Время приготовления должно быть больше "
+                f"или равно {settings.MIN_COOKING_TIME}",
             ),
         )
     )
     author = UserSerializer(read_only=True)
-    ingredients = serializers.SerializerMethodField()
-    is_favorited = serializers.SerializerMethodField()
-    is_in_shopping_cart = serializers.SerializerMethodField()
+    ingredients = serializers.SerializerMethodField(
+        method_name="get_ingredients"
+    )
+    is_favorited = serializers.SerializerMethodField(
+        method_name="get_is_favorited"
+    )
+    is_in_shopping_cart = serializers.SerializerMethodField(
+        method_name="get_is_in_shopping_cart"
+    )
 
     class Meta:
         model = Recipe
@@ -118,22 +128,25 @@ class RecipeSerializer(serializers.ModelSerializer):
             amount=F("recipeingredient__amount"),
         )
 
-    def get_realtions_field(self, obj, field_name):
-        """Проверка значений полей связи рецепта с пользователем."""
+    def get_is_favorited(self, obj):
+        """Рецепт находится в избранном."""
+
         user = self.context.get("request").user
         try:
             relation = obj.relations.get(user=user)
         except Exception:
             return False
-        return getattr(relation, field_name)
-
-    def get_is_favorited(self, obj):
-        """Рецепт находится в избранном."""
-        return self.get_realtions_field(obj, field_name="is_favorited")
+        return relation.is_favorited
 
     def get_is_in_shopping_cart(self, obj):
         """Рецепт находится в списке покупок."""
-        return self.get_realtions_field(obj, field_name="is_in_shopping_cart")
+
+        user = self.context.get("request").user
+        try:
+            relation = obj.relations.get(user=user)
+        except Exception:
+            return False
+        return relation.is_in_shopping_cart
 
     def recipe_ingredient_create(self, ingredients, recipe):
         """Формирование связи рецепта и ингредиентов."""
@@ -174,17 +187,22 @@ class RecipeSerializer(serializers.ModelSerializer):
                 raise ValidationError(
                     "Ингредиенты содержат недопустимые данные"
                 )
-            if ing_amount < 1:
+            if ing_amount < settings.MIN_INGREDIENT_AMOUNT:
                 raise ValidationError(
-                    "Убедитесь, что это значение больше, либо равно единице"
+                    f"Убедитесь, что количество больше, "
+                    f"либо равно {settings.MIN_INGREDIENT_AMOUNT}"
                 )
-            ingredients_valid.append({"id": ing_id, "amount": ing_amount})
+            ing_valid = {"id": ing_id, "amount": ing_amount}
+            if ing_valid in ingredients_valid:
+                raise ValidationError("Этот ингредиент уже добавлен")
+            ingredients_valid.append(ing_valid)
         if not ingredients_valid:
             raise ValidationError("Проверьте ингредиенты")
         data["ingredients"] = ingredients_valid
 
         return data
 
+    @atomic
     def create(self, validated_data):
         """Создание рецепта."""
         tags = validated_data.pop("tags")
@@ -194,6 +212,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         self.recipe_ingredient_create(recipe=recipe, ingredients=ingredients)
         return recipe
 
+    @atomic
     def update(self, instance, validated_data):
         """Обновление рецепта."""
         instance.name = validated_data.get("name", instance.name)

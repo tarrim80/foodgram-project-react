@@ -11,8 +11,6 @@ from django.db.models.signals import post_migrate, post_save
 from django.dispatch import receiver
 from users.models import User
 
-MIGRATION_LIFETIME = 30
-
 
 @receiver(post_save, sender=User)
 def assign_admin_group(sender, instance, **kwargs):
@@ -37,7 +35,9 @@ def after_migration(sender, **kwargs):
 def load_mock_data(sender, **kwargs):
     """
     Загрузка фиктивных данных спарсенных с сайта `food.ru` для тестирования
-    работы ресурса. Загрузка срабатывает только один раз после первой
+    работы ресурса.
+
+    Загрузка срабатывает только один раз после первой
     миграции моделей приложений `users` и `recipes` и только в процессе
     разработки.
     """
@@ -64,7 +64,9 @@ def load_mock_data(sender, **kwargs):
     time_since_last_migration = (
         dt.utcnow() - time_last_migration
     ).total_seconds()
-    time_is_appropriate = time_since_last_migration < MIGRATION_LIFETIME
+    time_is_appropriate = (
+        time_since_last_migration < settings.MIGRATION_LIFETIME_SEC
+    )
 
     if not time_is_appropriate:
         return
@@ -85,7 +87,7 @@ def load_mock_data(sender, **kwargs):
 
 def set_admin_permissions(sender, **kwargs):
     """Установка прав администраторов после обновления БД."""
-    # if sender.name == 'django.contrib.auth':
+
     admin_group, _ = Group.objects.get_or_create(name="Администраторы")
     admin_group.save()
 
