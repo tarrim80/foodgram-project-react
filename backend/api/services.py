@@ -1,10 +1,11 @@
 import datetime
 import io
 import operator
-import os
 
 from django.conf import settings
 from fpdf import FPDF
+
+FP = settings.SHOPPING_LIST_FILE_PARAMS
 
 
 class FoodgramPDF(FPDF):
@@ -14,8 +15,6 @@ class FoodgramPDF(FPDF):
         self,
         side_margin,
         top_margin,
-        number_col_need,
-        checkbox_col_need,
         h_gap,
         v_gap,
         *args,
@@ -30,51 +29,20 @@ class FoodgramPDF(FPDF):
             self.top_margin,
             self.side_margin,
         )
-        self.number_col_need = number_col_need
-        self.checkbox_col_need = checkbox_col_need
+        self.set_margins(*self.margins)
         self.h_gap = h_gap
         self.v_gap = v_gap
 
-        self.add_font(
-            "Montserrat",
-            "",
-            os.path.join(
-                settings.BASE_DIR, "media", "fonts", "Montserrat-Regular.ttf"
-            ),
-        )
-        self.add_font(
-            "Montserrat",
-            "I",
-            os.path.join(
-                settings.BASE_DIR, "media", "fonts", "Montserrat-Italic.ttf"
-            ),
-        )
-        self.add_font(
-            "Montserrat",
-            "B",
-            os.path.join(
-                settings.BASE_DIR, "media", "fonts", "Montserrat-Bold.ttf"
-            ),
-        )
-        self.add_font(
-            "Montserrat",
-            "BI",
-            os.path.join(
-                settings.BASE_DIR,
-                "media",
-                "fonts",
-                "Montserrat-BoldItalic.ttf",
-            ),
-        )
-
-        self.set_margins(*self.margins)
+        for font in FP.get("ADD_FONTS"):
+            self.add_font(**font)
 
     def header(self):
         """Верхний колонтитул страницы."""
         title = (
-            f'Список покупок от {datetime.date.today().strftime("%x")}'
+            f'{FP.get("HEADER")["HEADER_TITLE_START"]} '
+            f'{datetime.date.today().strftime("%x")}'
         ).upper()
-        self.set_font("montserrat", "B", 14)
+        self.set_font(**FP.get("HEADER")["HEADER_FONT"])
         title_width = self.get_string_width(title) + 6
         self.set_x((self.w - title_width) / 2)
         self.set_line_width(1)
@@ -89,17 +57,17 @@ class FoodgramPDF(FPDF):
 
     def footer(self):
         """Нижний колонтитул страницы."""
-        self.set_margin(0)
-        self.set_y(-20)
-        self.set_font("montserrat", "", 12)
-        self.set_text_color(255)
-        self.set_fill_color(0)
-        img_cell_width = 25
-        img_width = 12
+        self.set_margin(FP.get("FOOTER")["FOOTER_MARGIN"])
+        self.set_y(FP.get("FOOTER")["FOOTER_Y"])
+        self.set_font(**FP.get("FOOTER")["FOOTER_FONT"])
+        self.set_text_color(FP.get("FOOTER")["FOOTER_TEXT_COLOR"])
+        self.set_fill_color(FP.get("FOOTER")["FOOTER_FILL_COLOR"])
+        footer_height = FP.get("FOOTER")["FOOTER_HEIGHT"]
+        label = FP.get("FOOTER")["FOOTER_LABEL"]
+        img_width = FP.get("FOOTER")["LOGO_IMAGE"]["w"]
+        img_cell_width = img_width * 2
         page_no_str = f"стр. {self.page_no()}"
         page_no_width = self.get_string_width(page_no_str) + 10
-        footer_height = 20
-        label = "Продуктовый помощник"
         self.cell(img_cell_width, footer_height, fill=True)
         self.cell(
             self.w - img_cell_width - page_no_width,
@@ -108,13 +76,15 @@ class FoodgramPDF(FPDF):
             fill=True,
         )
         self.cell(
-            page_no_width - 8, footer_height, page_no_str, fill=True, align="R"
+            page_no_width - 8,
+            footer_height,
+            page_no_str,
+            fill=True,
+            align="R",
         )
         self.cell(8, footer_height, fill=True)
         self.image(
-            os.path.join(settings.BASE_DIR, "media", "logo", "favicon.png"),
-            w=img_width,
-            keep_aspect_ratio=True,
+            **FP.get("FOOTER")["LOGO_IMAGE"],
             x=img_cell_width - img_width - 5,
             y=self.h - img_width - (footer_height - img_width) / 2,
         )
@@ -124,7 +94,7 @@ class FoodgramPDF(FPDF):
         """Установка высоты ячейки в зависимости от размера шрифта."""
         self.cell_height = self.font_size + v_gap * 2
 
-    def get_column_params(self, itemset, h_gap, text_align, cell_border):
+    def get_column_params(self, itemset, h_gap, cell_border):
         """Определение параметров столбцов и атрибутов ячеек."""
 
         column_params = {}
@@ -218,27 +188,16 @@ class FoodgramPDF(FPDF):
 
 def create_shopping_file(itemset):
     """Создание файла со списком покупок."""
-    pdf = FoodgramPDF(
-        orientation="portrait",
-        unit="mm",
-        format="A4",
-        side_margin=9,
-        top_margin=5,
-        number_col_need=True,
-        checkbox_col_need=True,
-        h_gap=3,
-        v_gap=2,
-    )
+
+    pdf = FoodgramPDF(**FP.get("FILE_CREATE"))
     pdf.add_page()
-    pdf.set_auto_page_break(auto=True, margin=23)
-    pdf.set_font("Montserrat", "", size=12)
+    pdf.set_auto_page_break(**FP.get("BASIC_PAGE")["PAGE_BREAK"])
+    pdf.set_font(**FP.get("BASIC_PAGE")["MAIN_FONT"])
     pdf.set_cell_height(v_gap=pdf.v_gap)
-    txt_align = ("LEFT", "RIGHT", "LEFT")
     colparams = pdf.get_column_params(
         itemset=itemset,
         h_gap=pdf.h_gap,
-        text_align=txt_align,
-        cell_border=False,
+        cell_border=FP.get("CELL_BORDER"),
     )
     for num, item in enumerate(itemset, start=1):
         for col in colparams:

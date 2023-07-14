@@ -182,7 +182,74 @@ if DEBUG:
     INTERNAL_IPS = ("127.0.0.1",)
 
 
-# __________________CONSTANTES________________ #
+# _______________SHOPPING_LIST_____________________ #
+
+SHOPPING_LIST_FILE_PARAMS = {
+    "ADD_FONTS": [
+        {
+            "family": "Montserrat",
+            "style": "",
+            "fname": os.path.join(
+                BASE_DIR, "media", "fonts", "Montserrat-Regular.ttf"
+            ),
+        },
+        {
+            "family": "Montserrat",
+            "style": "I",
+            "fname": os.path.join(
+                BASE_DIR, "media", "fonts", "Montserrat-Italic.ttf"
+            ),
+        },
+        {
+            "family": "Montserrat",
+            "style": "B",
+            "fname": os.path.join(
+                BASE_DIR, "media", "fonts", "Montserrat-Bold.ttf"
+            ),
+        },
+        {
+            "family": "Montserrat",
+            "style": "BI",
+            "fname": os.path.join(
+                BASE_DIR, "media", "fonts", "Montserrat-BoldItalic.ttf"
+            ),
+        },
+    ],
+    "CELL_BORDER": False,
+    "FILE_CREATE": {
+        "orientation": "portrait",
+        "unit": "mm",
+        "format": "A4",
+        "side_margin": 12,
+        "top_margin": 5,
+        "h_gap": 3,
+        "v_gap": 2,
+    },
+    "HEADER": {
+        "HEADER_TITLE_START": "Список покупок от",
+        "HEADER_FONT": {"family": "montserrat", "style": "B", "size": 14},
+    },
+    "BASIC_PAGE": {
+        "MAIN_FONT": {"family": "montserrat", "style": "", "size": 12},
+        "PAGE_BREAK": {"auto": True, "margin": 23},
+    },
+    "FOOTER": {
+        "LOGO_IMAGE": {
+            "name": os.path.join(BASE_DIR, "media", "logo", "favicon.png"),
+            "w": 12,
+            "keep_aspect_ratio": True,
+        },
+        "FOOTER_Y": -20,
+        "FOOTER_HEIGHT": 20,
+        "FOOTER_TEXT_COLOR": 255,
+        "FOOTER_FILL_COLOR": 0,
+        "FOOTER_LABEL": "Продуктовый помощник",
+        "FOOTER_FONT": {"family": "montserrat", "style": "", "size": 12},
+        "FOOTER_MARGIN": 0,
+    },
+}
+
+# __________________OTHER_CONSTANTS________________ #
 
 MIN_COOKING_TIME = 1
 MIN_INGREDIENT_AMOUNT = 1
