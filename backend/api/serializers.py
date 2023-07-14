@@ -158,20 +158,16 @@ class RecipeSerializer(serializers.ModelSerializer):
                 amount=ingredient.get("amount"),
             )
 
-    def validate(self, data):
-        """Проверки данных передаваемых в запросе."""
-
-        validation_data = self.initial_data
-
-        tags_data = validation_data.pop("tags")
+    def validate_tags(self, tags_data):
+        """Проверка тегов."""
         if not tags_data:
-            raise ValidationError("Рецепт должен содержать тэги")
+            raise ValidationError("Рецепт должен содержать теги")
         tags_int = all(isinstance(tag_id, int) for tag_id in tags_data)
         if not tags_int:
             raise ValidationError("Тэги содержат недопустимые данные")
-        data["tags"] = tags_data
 
-        ingredients = self.initial_data.get("ingredients")
+    def validate_ingredients(self, ingredients):
+        """Проерка ингредиентов."""
         if not ingredients:
             raise ValidationError("Рецепт должен содержать ингредиенты")
         ingredients_valid = []
@@ -196,8 +192,18 @@ class RecipeSerializer(serializers.ModelSerializer):
             if ing_valid in ingredients_valid:
                 raise ValidationError("Этот ингредиент уже добавлен")
             ingredients_valid.append(ing_valid)
-        if not ingredients_valid:
-            raise ValidationError("Проверьте ингредиенты")
+        return ingredients_valid
+
+    def validate(self, data):
+        """Проверки данных передаваемых в запросе."""
+        validation_data = self.initial_data
+
+        tags_data = validation_data.pop("tags")
+        self.validate_tags(tags_data)
+        data["tags"] = tags_data
+
+        ingredients = self.initial_data.get("ingredients")
+        ingredients_valid = self.validate_ingredients(ingredients)
         data["ingredients"] = ingredients_valid
 
         return data
