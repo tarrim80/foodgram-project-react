@@ -23,6 +23,7 @@ services:
     volumes:
       - static:/foodgram_backend_static
       - media:/app/media
+      - ./backend/:/app/
     restart: always
 
   frontend:
@@ -32,7 +33,6 @@ services:
       - static:/foodgram_frontend_static
 
   nginx:
-    # build: ./infra/
     image: nginx:1.22.1
     ports:
       - "80:80"
