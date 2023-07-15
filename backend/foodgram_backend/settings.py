@@ -238,6 +238,10 @@ SHOPPING_LIST_FILE_PARAMS = {
         "FOOTER_FONT": {"family": "montserrat", "style": "", "size": 12},
         "FOOTER_MARGIN": 0,
     },
+    "FILE_DOWNLOAD": {
+        "as_attachment": True,
+        "content_type": "application/pdf",
+    },
 }
 
 # __________________OTHER_CONSTANTS________________ #

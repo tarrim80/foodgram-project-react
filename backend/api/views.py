@@ -11,6 +11,7 @@ from api.serializers import (
     TagSerializer,
 )
 from api.services import create_shopping_file
+from django.conf import settings
 from django.db.models import Sum
 from django.http import FileResponse
 from django_filters.rest_framework import DjangoFilterBackend
@@ -242,17 +243,12 @@ class RecipeViewSet(ModelViewSet):
         for item in queryset:
             item["amount__sum"] = str(item["amount__sum"])
 
+        fp = settings.SHOPPING_LIST_FILE_PARAMS.get("FILE_DOWNLOAD")
         file = create_shopping_file(queryset)
-        return FileResponse(
-            file,
-            as_attachment=True,
-            content_type="application/pdf",
-            status=status.HTTP_200_OK,
-        )
+        return FileResponse(file, status=status.HTTP_200_OK, **fp)
 
     def perform_create(self, serializer):
         """Передача текущего пользователя в качестве автора рецепта."""
-
         if self.request.user.is_anonymous:
             raise PermissionDenied(
                 "Зарегистрируйтесь, чтоб разместить рецепт."
