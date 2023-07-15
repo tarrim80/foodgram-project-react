@@ -10,3 +10,6 @@ htmlcov
 coverage*
 *.http
 *-dev*
+
+# github images
+/media/github/
