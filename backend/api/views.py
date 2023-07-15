@@ -241,7 +241,7 @@ class RecipeViewSet(ModelViewSet):
         )
 
         for item in queryset:
-            item["amount__sum"] = str(item["amount__sum"])
+            item["amount__sum"] = f"{item['amount__sum']:g}"
 
         fp = settings.SHOPPING_LIST_FILE_PARAMS.get("FILE_DOWNLOAD")
         file = create_shopping_file(queryset)
