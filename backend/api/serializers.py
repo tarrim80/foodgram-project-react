@@ -181,7 +181,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                 ing_amount = float(ing_amount)
             except ValueError:
                 raise ValidationError(
-                    "Ингредиенты содержат недопустимые данные"
+                    "Количество игредиента содержит недопустимые данные"
                 )
             if ing_amount < settings.MIN_INGREDIENT_AMOUNT:
                 raise ValidationError(
@@ -189,8 +189,11 @@ class RecipeSerializer(serializers.ModelSerializer):
                     f"либо равно {settings.MIN_INGREDIENT_AMOUNT}"
                 )
             ing_valid = {"id": ing_id, "amount": ing_amount}
-            if ing_valid in ingredients_valid:
-                raise ValidationError("Этот ингредиент уже добавлен")
+            ing_ids_valid = [item["id"] for item in ingredients_valid]
+            if ing_valid.get("id") in ing_ids_valid:
+                raise ValidationError(
+                    "В рецепт нельзя добавить одинаковые ингредиенты"
+                )
             ingredients_valid.append(ing_valid)
         return ingredients_valid
 
