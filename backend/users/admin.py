@@ -40,11 +40,8 @@ class UserAdmin(UserAdmin):
     prepopulated_fields = {"username": ("first_name", "last_name")}
 
     list_display = ("username", "email", "first_name", "last_name", "is_staff")
-    search_fields = ("username", "email")
-    list_filter = (
-        "username",
-        "email",
-    )
+    search_fields = ("username", "email", "first_name", "last_name")
+    list_filter = ("username", "email", "is_staff", "is_superuser")
     empty_value_display = "-пусто-"
     fieldsets = (
         (
@@ -65,8 +62,17 @@ class UserAdmin(UserAdmin):
 
 class SubscribeAdmin(admin.ModelAdmin):
     list_display = ("user", "author")
-    list_filter = ("user", "author")
-    search_fields = ("user", "author")
+    # list_filter = ("user", "author")
+    search_fields = (
+        "user__username",
+        "user__email",
+        "user__first_name",
+        "user__last_name",
+        "author__username",
+        "author__email",
+        "author__first_name",
+        "author__last_name",
+    )
     list_per_page = settings.PAGE_SIZE * 5
 
 

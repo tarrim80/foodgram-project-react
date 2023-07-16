@@ -64,12 +64,16 @@ class RecipeAdmin(admin.ModelAdmin):
         "name",
     )
     list_select_related = ("author",)
-    list_filter = ("tags", "author", "name")
+    list_filter = ("tags",)
     search_fields = (
         "name",
         "text",
         "tags__name",
         "ingredients__name",
+        "author__username",
+        "author__email",
+        "author__first_name",
+        "author__last_name",
     )
     fields = (
         ("name", "cooking_time"),
@@ -120,20 +124,44 @@ class RecipeAdmin(admin.ModelAdmin):
 class RecipeRelationAdmin(admin.ModelAdmin):
     """Админ-панель отношений пользователя и рецепта."""
 
-    list_display = ("user", "recipe", "is_favorited", "is_in_shopping_cart")
+    list_display = (
+        "user",
+        "recipe",
+        "is_favorited",
+        "is_in_shopping_cart",
+    )
     list_filter = ("user", "is_favorited", "is_in_shopping_cart")
-    search_fields = ("user", "recipe")
     list_per_page = settings.PAGE_SIZE * 5
     list_select_related = ("user",)
     raw_id_fields = ("user", "recipe")
+    search_fields = (
+        "user__username",
+        "user__email",
+        "recipe__author__username",
+        "recipe__author__email",
+        "recipe__name",
+    )
+    list_filter = ("recipe__tags",)
 
 
 class RecipeTagAdmin(admin.ModelAdmin):
     list_display = ("recipe", "tag")
+    search_fields = (
+        "recipe__author__username",
+        "recipe__author__email",
+        "recipe__name",
+    )
+    list_filter = ("recipe__tags",)
 
 
 class RecipeIngredientAdmin(admin.ModelAdmin):
     list_display = ("recipe", "ingredient", "amount")
+    search_fields = (
+        "recipe__author__username",
+        "recipe__author__email",
+        "recipe__name",
+    )
+    list_filter = ("recipe__tags",)
 
 
 admin.site.register(Ingredient, IngredientAdmin)
