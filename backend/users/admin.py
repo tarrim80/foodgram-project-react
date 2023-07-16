@@ -62,7 +62,6 @@ class UserAdmin(UserAdmin):
 
 class SubscribeAdmin(admin.ModelAdmin):
     list_display = ("user", "author")
-    # list_filter = ("user", "author")
     search_fields = (
         "user__username",
         "user__email",
